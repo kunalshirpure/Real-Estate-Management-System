@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.pms.RealEstate.model.Login;
 
 @Repository
-public interface LoginDao extends JpaRepository<Login,Integer>
+public interface LoginDao extends JpaRepository<Login,String>
 {
-	
+	// You can add custom query methods here if needed
 }

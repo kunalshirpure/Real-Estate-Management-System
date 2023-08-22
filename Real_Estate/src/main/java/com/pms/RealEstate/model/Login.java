@@ -2,13 +2,13 @@ package com.pms.RealEstate.model;
 
 import javax.persistence.*;
 
-
 @Entity
 public class Login {
 
-    @Id
-    private String email_id;
-    private String password;
+	@Id
+	private String email_id;
+	private String password;
+
 	public Login() {
 		super();
 	}
@@ -35,15 +35,9 @@ public class Login {
 		this.password = password;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Login [email_id=" + email_id + ", password=" + password + "]";
 	}
 
-    
-    
-    
 }
-
