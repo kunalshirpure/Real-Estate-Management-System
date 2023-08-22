@@ -1,5 +1,7 @@
 package com.pms.RealEstate.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +22,8 @@ public class LoginServiceImpl implements LoginService{
 		Login l=new Login(a.getEmail_id(),a.getPassword());
 		logindao.save(l);
 	}
+	
+	
+
 
 }

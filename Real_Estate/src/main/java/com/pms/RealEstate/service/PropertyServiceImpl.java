@@ -1,5 +1,6 @@
 package com.pms.RealEstate.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,11 +17,19 @@ public class PropertyServiceImpl implements PropertyService
 	@Autowired
 	PropertyDao propertydao;
 	
+	
+	List<Property> ab=new ArrayList<>();
 	@Override
 	public List<Property> getProperty() {
 		List<Property> plist= propertydao.findAll();
+		ab.addAll(plist);
+		
+		   for (Property element : plist) {
+	            System.out.println(element);
+	        }
 		return plist;
 	}
+	
 
 	@Override
 	public void addProperty(Property a) {
@@ -67,4 +76,17 @@ public class PropertyServiceImpl implements PropertyService
 		        existingProperty.setDescription(p.getDescription());
 		        propertydao.save(existingProperty);
 		}}
-}
+
+
+	 @Override
+	    public List<Property> getPropertiesByCity(String city) {
+	        return propertydao.findByCity(city);
+	    }
+
+
+	 @Override
+	    public List<Property> getPropertiesByCityStateAndType(String city, String state, String propertyType) {
+	        return propertydao.findByLocality_CityAndLocality_StateAndPropertyType(city, state, propertyType);
+	    }
+	}
+

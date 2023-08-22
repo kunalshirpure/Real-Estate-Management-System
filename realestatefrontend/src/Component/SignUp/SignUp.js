@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './SignUp.css';
+import axios from 'axios';
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState('');
@@ -9,17 +10,36 @@ const SignUp = () => {
   const [contact, setContact] = useState('');
   const [address, setAddress] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Perform form submission logic here
-    console.log('Form submitted:', {
-      firstName,
-      lastName,
-      email,
-      password,
-      contact,
-      address
-    });
+
+    const newUser = {
+      first_name: firstName,
+      last_name: lastName,
+      email_id: email,
+      password: password,
+      contact: contact,
+      address: address,
+      role: 'user'
+    };
+
+    try {
+      await axios.post('http://localhost:8585/register', newUser);
+      window.alert('You are registered!');
+      clearFormFields();
+    } catch (error) {
+      console.error('Registration error:', error);
+      window.alert('Registration failed. Please try again.');
+    }
+  };
+
+  const clearFormFields = () => {
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPassword('');
+    setContact('');
+    setAddress('');
   };
 
   return (
@@ -81,6 +101,7 @@ const SignUp = () => {
           />
         </div>
         <button type="submit">Sign Up</button>
+
       </form>
     </div>
   );

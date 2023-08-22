@@ -16,7 +16,9 @@ public interface PropertyService {
 
 	void updateproperty(Property p);
 
+	List<Property> getPropertiesByCity(String city);
 
+	List<Property> getPropertiesByCityStateAndType(String city, String state, String propertyType);
 
 	
 }
