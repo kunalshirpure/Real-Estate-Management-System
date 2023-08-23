@@ -26,5 +26,8 @@ public interface PropertyDao extends JpaRepository<Property,Integer>
 	
 	
 	
+	 @Query("SELECT p FROM Property p JOIN FETCH p.rental")
+	List<Property> findAllPropertiesWithRental();
+	
 	
 }
