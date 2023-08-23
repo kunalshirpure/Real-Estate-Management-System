@@ -10,19 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pms.RealEstate.dao.AccountDao;
-import com.pms.RealEstate.dao.LoginDao;
+
 import com.pms.RealEstate.dto.LoginDto;
 import com.pms.RealEstate.model.Accounts;
-import com.pms.RealEstate.model.Login;
-
 @Service
 public class AccountServiceImpl implements AccountService {
 	
 	@Autowired
 	AccountDao accountdao;
-	
-	@Autowired
-	LoginDao logindao;
 
 		 @Transactional
 		    public Accounts registerUser(Accounts account) {

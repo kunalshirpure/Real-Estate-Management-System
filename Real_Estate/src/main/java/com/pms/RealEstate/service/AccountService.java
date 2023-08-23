@@ -5,7 +5,7 @@ import java.util.List;
 import com.pms.RealEstate.dto.AccountsDto;
 import com.pms.RealEstate.dto.LoginDto;
 import com.pms.RealEstate.model.Accounts;
-import com.pms.RealEstate.model.Login;
+
 
 public interface AccountService {
 
