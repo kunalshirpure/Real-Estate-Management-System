@@ -3,14 +3,14 @@ package com.pms.RealEstate.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-
 import org.springframework.web.bind.annotation.RestController;
-
+import com.pms.RealEstate.dto.LoginDto;
 import com.pms.RealEstate.model.Accounts;
 import com.pms.RealEstate.service.AccountService;
 
@@ -36,10 +36,12 @@ public class AccountController {
         return ResponseEntity.ok(accounts);
     }
 	
-  
-	 
-	
-	
+	@PostMapping("/login")
+    public Accounts dislogi(@RequestBody LoginDto userlogin)
+    {
+		System.out.println(userlogin.toString());
+		return accountservice.verifyaccount(userlogin);
+    }
 }
 	
 	

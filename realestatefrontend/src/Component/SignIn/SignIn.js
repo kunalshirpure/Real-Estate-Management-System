@@ -1,22 +1,44 @@
 import React, { useState } from 'react';
-import './SignIn.css'; // Import your CSS file for styling
+import './SignIn.css';
+import axios from 'axios';
 
 const SignIn = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleUsernameChange = (event) => {
+    console.log(event.target.value);
     setUsername(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
+    console.log(event.target.value);
     setPassword(event.target.value);
   };
 
-  const handleSignIn = (event) => {
+  const handleSignIn = async (event) => {
     event.preventDefault();
-    // Here you can add your authentication logic
-    console.log('Sign in clicked:', username, password);
+ 
+   console.log(username);
+   console.log(password);
+
+    try {
+      const response = await axios.post('http://localhost:8585/login', {
+        "email_id":username,
+        "password":password,
+      });
+
+      if (response.data) {
+        console.log('Login successful:', response.data);
+        // Handle successful login, such as storing tokens or redirecting to a dashboard
+      } else {
+        setErrorMessage('Invalid username or password');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setErrorMessage('An error occurred while logging in');
+    }
   };
 
   const handleForgotPassword = () => {
@@ -50,6 +72,7 @@ const SignIn = () => {
         <button type="button" onClick={handleForgotPassword}>
           Forgot Password
         </button>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </form>
     </div>
   );

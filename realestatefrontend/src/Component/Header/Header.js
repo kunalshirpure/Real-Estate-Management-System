@@ -12,7 +12,7 @@ const Header = () => {
           <li><Link to="/postproperty">Post Properties</Link></li>
           
           <li><Link to="/contact">Contact</Link></li>
-          <li><Link to="/signin">Sign In</Link></li>
+          <li><Link to="/signin">Log In</Link></li>
           <li><Link to="/signup">Sign Up</Link></li>
         </ul>
       </nav>
