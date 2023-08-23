@@ -20,8 +20,5 @@ public class RentalServiceImpl implements RentalService
           return rentaldao.findAll();
      }
 
-	@Override
-	public void addRentaldetails(Rental r) {
-		rentaldao.save(r);
-	 }
+	
 }

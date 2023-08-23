@@ -3,7 +3,6 @@ package com.pms.RealEstate.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,18 +28,19 @@ public class AccountController {
         Accounts newAccounts = accountservice.registerUser(accounts);
         return ResponseEntity.ok(newAccounts);
 	}
-
-	@GetMapping("/get")
-    public ResponseEntity<List<Accounts>> getAllAccounts() {
-        List<Accounts> accounts = accountservice.getAllAccounts();
-        return ResponseEntity.ok(accounts);
-    }
 	
 	@PostMapping("/login")
     public Accounts dislogi(@RequestBody LoginDto userlogin)
     {
 		System.out.println(userlogin.toString());
 		return accountservice.verifyaccount(userlogin);
+    }
+	
+	
+	@GetMapping("/get")
+    public ResponseEntity<List<Accounts>> getAllAccounts() {
+        List<Accounts> accounts = accountservice.getAllAccounts();
+        return ResponseEntity.ok(accounts);
     }
 }
 	

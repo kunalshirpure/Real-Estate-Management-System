@@ -8,6 +8,5 @@ public interface BuyingService {
 
 	public List<Buying> getAllBuyingProperties();
 
-	void addBuyingdetails(Buying b);
 
 }

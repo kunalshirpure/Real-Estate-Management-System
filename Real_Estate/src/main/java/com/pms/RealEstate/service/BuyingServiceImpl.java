@@ -18,11 +18,7 @@ public class BuyingServiceImpl implements BuyingService {
 	    return buyingdao.findAll();
 	}
 
-	@Override
-	public void addBuyingdetails(Buying b) {
-		buyingdao.save(b);
-		
-	}
+	
 
 }
 

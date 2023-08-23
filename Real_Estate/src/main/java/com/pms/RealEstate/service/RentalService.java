@@ -8,7 +8,7 @@ public interface RentalService
 {
 	public List<Rental> getAllRentedProperties();
 
-	public void addRentaldetails(Rental r);
+
 
 }
 

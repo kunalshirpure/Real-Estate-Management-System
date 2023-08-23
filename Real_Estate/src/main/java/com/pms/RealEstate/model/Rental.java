@@ -2,6 +2,7 @@ package com.pms.RealEstate.model;
 
 import javax.persistence.*;
 
+
 @Entity
 public class Rental {
 
@@ -88,6 +89,7 @@ public class Rental {
 				+ ", expected_rent=" + expected_rent + ", expected_deposit=" + expected_deposit + ", preferred_tenants="
 				+ preferred_tenants + "]";
 	}
+
 
    
 }

@@ -1,13 +1,16 @@
 package com.pms.RealEstate.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.pms.RealEstate.dao.PropertyDao;
+import com.pms.RealEstate.dto.PropertyDto;
+import com.pms.RealEstate.model.Buying;
 import com.pms.RealEstate.model.Property;
+import com.pms.RealEstate.model.Rental;
 
 
 @Service
@@ -17,25 +20,68 @@ public class PropertyServiceImpl implements PropertyService
 	@Autowired
 	PropertyDao propertydao;
 	
-	
-	List<Property> ab=new ArrayList<>();
-	@Override
-	public List<Property> getProperty() {
-		List<Property> plist= propertydao.findAll();
-		ab.addAll(plist);
-		
-		   for (Property element : plist) {
-	            System.out.println(element);
-	        }
-		return plist;
-	}
-	
 
-	@Override
-	public void addProperty(Property a) {
-		propertydao.save(a);
-		
-	}
+    public List<Property> getAllProperties() {
+        return propertydao.findAll();
+    }
+
+	
+	
+	public void addProperty1(PropertyDto propertyDTO)
+	  {
+        Property property = createPropertyFromDTO(propertyDTO);
+
+        if ("buy".equals(propertyDTO.getOperation())) {
+            Buying buying = createBuyingFromDTO(propertyDTO);
+            property.setBuying(buying);
+            buying.setProperty(property);
+        } else if ("rent".equals(propertyDTO.getOperation())) {
+            Rental rental = createRentalFromDTO(propertyDTO);
+            property.setRental(rental);
+            rental.setProperty(property);
+        }
+
+        propertydao.save(property);
+    }
+
+    private Rental createRentalFromDTO(PropertyDto propertyDTO) {
+        Rental rental = new Rental();
+        rental.setExpected_rent(propertyDTO.getExpected_rent());
+        rental.setExpected_deposit(propertyDTO.getExpected_deposit());
+        rental.setPreferred_tenants(propertyDTO.getPreferred_tenants());
+
+        // You can also set other properties specific to the Rental entity
+
+        return rental;
+    }
+    
+    public Property createPropertyFromDTO(PropertyDto propertyDTO) {
+        Property property = new Property();
+        
+        property.setProperty_name(propertyDTO.getProperty_name());
+        property.setProperty_type(propertyDTO.getProperty_type());
+        property.setBhk_type(propertyDTO.getBhk_type());
+        property.setBuildup_area(propertyDTO.getBuildup_area());
+        property.setFurnishing_type(propertyDTO.getFurnishing_type());
+        property.setFloor(propertyDTO.getFloor());
+        property.setListing_date(propertyDTO.getListing_date());
+        property.setLocality(propertyDTO.getLocality());
+        property.setLandmark_street(propertyDTO.getLandmark_street());
+        property.setCity(propertyDTO.getCity());
+        property.setState(propertyDTO.getState());
+        property.setPincode(propertyDTO.getPincode());
+        property.setDescription(propertyDTO.getDescription());
+        return property;
+    }
+
+    public Buying createBuyingFromDTO(PropertyDto propertyDTO) {
+        Buying buying = new Buying();
+        buying.setExpected_rate(propertyDTO.getExpected_rate());
+        return buying;
+    }
+    
+
+    
 
 	@Override
 	public Property getpropertybyId(int id) {
@@ -88,5 +134,8 @@ public class PropertyServiceImpl implements PropertyService
 	    public List<Property> getPropertiesByCityStateAndType(String city, String state, String propertyType) {
 	        return propertydao.findByLocality_CityAndLocality_StateAndPropertyType(city, state, propertyType);
 	    }
+
+
+	
 	}
 
