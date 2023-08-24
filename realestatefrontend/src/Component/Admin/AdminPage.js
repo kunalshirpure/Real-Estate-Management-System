@@ -6,22 +6,28 @@ const AdminPage = () => {
   const [users, setUsers] = useState([]);
 
   // Simulated data, replace with actual data from your API or database
-  const mockProperties = [
-    { id: 1, title: 'Beautiful House', location: 'City A, State B' },
-    { id: 2, title: 'Luxury Apartment', location: 'City X, State Y' },
-    // ... add more properties
-  ];
+  useEffect(() => {
+    // Simulated API call to fetch property and user data
+    axios.get('http://localhost:8585/get') // Replace with your API URL
+    .then(response => {
+      setUsers(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching properties:', error);
+    });
+    
+  }, []);
 
-  const mockUsers = [
-    { id: 1, name: 'Admin User', email: 'admin@example.com' },
-    { id: 2, name: 'User 1', email: 'user1@example.com' },
-    // ... add more users
-  ];
 
   useEffect(() => {
     // Simulated API call to fetch property and user data
-    setUsers(mockUsers);
-    setProperties(mockProperties);
+    axios.get('http://localhost:8585/properties') // Replace with your API URL
+    .then(response => {
+      setProperties(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching properties:', error);
+    });
     
   }, []);
 
