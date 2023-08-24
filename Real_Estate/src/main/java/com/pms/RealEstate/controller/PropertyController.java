@@ -56,7 +56,6 @@ public class PropertyController {
 		}
 	}
 	
-    
     // property insert api 
     @PostMapping("api/properties")
     public ResponseEntity<String> addProperty(@RequestBody PropertyDto propertyDTO) {
@@ -70,27 +69,7 @@ public class PropertyController {
         }
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
     
     @DeleteMapping("/deleteproperty/{id}")
     public ResponseEntity<String> deletePropertyDetails(@PathVariable int id) {
@@ -119,19 +98,7 @@ public class PropertyController {
     }
 
         
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-        
-        
-        
+       
         
     @PutMapping("/propertyupdate/{id}")
 	public ResponseEntity<String> updatePropertyDetails(@RequestBody Property p) {
@@ -142,10 +109,6 @@ public class PropertyController {
     
   
     
-   
- 
-    
-
     
 	@GetMapping("/rented-properties")
 	public List<Rental> getRentedProperties() 

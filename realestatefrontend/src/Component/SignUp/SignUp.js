@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './SignUp.css';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState('');
@@ -10,6 +12,8 @@ const SignUp = () => {
   const [contact, setContact] = useState('');
   const [address, setAddress] = useState('');
 
+
+  const notify = () => toast("Wow so easy!");
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -100,7 +104,7 @@ const SignUp = () => {
             required
           />
         </div>
-        <button type="submit">Sign Up</button>
+        <button onClick={notify}>Sign Up</button>
 
       </form>
     </div>

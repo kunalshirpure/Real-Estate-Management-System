@@ -49,9 +49,6 @@ public class PropertyServiceImpl implements PropertyService
         rental.setExpected_rent(propertyDTO.getExpected_rent());
         rental.setExpected_deposit(propertyDTO.getExpected_deposit());
         rental.setPreferred_tenants(propertyDTO.getPreferred_tenants());
-
-        // You can also set other properties specific to the Rental entity
-
         return rental;
     }
     
@@ -79,7 +76,12 @@ public class PropertyServiceImpl implements PropertyService
         buying.setExpected_rate(propertyDTO.getExpected_rate());
         return buying;
     }
-    
+//    
+//    public Images createBuyingFromDTO(PropertyDto propertyDTO) {
+//        Images image = new Images();
+//        Images.setExpected_rate(propertyDTO.getExpected_rate());
+//        return buying;
+//    }
 
     
 

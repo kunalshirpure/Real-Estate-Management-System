@@ -1,30 +1,30 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './PostProperty.css'; // Import your CSS file for styling
-import axios from 'axios'
 
 
 const PostProperty = () => {
-  const [step, setStep] = useState(1);
   const [propertyDetails, setPropertyDetails] = useState({
     property_name: '',
     property_type: '',
     bhk_type: '',
-    buildup_area: '',
+    buildup_area: 0,
     furnishing_type: '',
-    floor: '',
+    floor: 0,
     listing_date: '',
     locality: '',
     landmark_street: '',
     city: '',
     state: '',
-    pincode: '',
+    pincode: 0,
     description: '',
-    post_type: '', // Add this field for post_type
-    expected_rent: '', // Add this field for expected_rent
-    expected_deposit: '', // Add this field for expected_deposit
-    preferred_tenants: '', // Add this field for preferred_tenants
-    expected_rate: '', // Add this field for expected_rate
+    operation: '', // 'buy' or 'rent'
+    expected_rate: 0, // only for buying
+    expected_rent: 0, // only for renting
+    expected_deposit: 0, // only for renting
+    preferred_tenants: '' // only for renting
   });
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,74 +33,67 @@ const PostProperty = () => {
       [name]: value,
     }));
   };
-  const handleNext = () => {
-    setStep(step + 1);
-  };
-  const handleSubmit = async (e) => {
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    const propertyResponse = await axios.post('localhost:8585/addproperty', propertyDetails);
+    window.alert("Axios method")
+    try {
+      const response = await axios.post('http://localhost:8585/api/properties',
 
-    if (propertyResponse.status === 200) {
-      console.log('Property details submitted:', propertyDetails);
+        {
 
-      // Send rent or buying details to the respective table
-      if (propertyDetails.post_type === 'rent') {
-        const rentDetails = {
-          property: propertyResponse.data.property_id,
-          expected_rent: propertyDetails.expected_rent,
-          expected_deposit: propertyDetails.expected_deposit,
-          preferred_tenants: propertyDetails.preferred_tenants,
-        };
+          "property_name": propertyDetails.property_name,
+          "property_type": propertyDetails.property_type,
+          "bhk_type": propertyDetails.bhk_type,
+          "buildup_area": parseFloat(propertyDetails.buildup_area),
+          "furnishing_type": propertyDetails.furnishing_type,
+          "floor": parseInt(propertyDetails.floor), // Parse as integer
+          "listing_date": propertyDetails.listing_date,
+          "locality": propertyDetails.locality,
+          "landmark_street": propertyDetails.landmark_street,
+          "city": propertyDetails.city,
+          "state": propertyDetails.state,
+          "pincode": parseInt(propertyDetails.pincode),
+          "description": propertyDetails.description,
+          "operation": propertyDetails.operation,
+          "expected_rate": parseFloat(propertyDetails.expected_rate),
+          "expected_rent": parseFloat(propertyDetails.expected_rent), // only for renting
+          "expected_deposit": parseFloat(propertyDetails.expected_deposit),// only for renting
+          "preferred_tenants": propertyDetails.preferred_tenants,
 
-        const rentResponse = await axios.post('localhost:8585/addrentaldetails', rentDetails);
-
-        if (rentResponse.status === 200) {
-          console.log('Rent details submitted:', rentDetails);
-        } else {
-          console.error('Error submitting rent details');
-          // Handle error cases
-        }
-      } else if (propertyDetails.post_type === 'buy') {
-        const buyDetails = {
-          property: propertyResponse.data.property_id,
-          expected_rate: propertyDetails.expected_rate,
-        };
-
-        const buyResponse = await axios.post('localhost:8585/addbuyingdetails', buyDetails);
-
-        if (buyResponse.status === 200) {
-          console.log('Buy details submitted:', buyDetails);
-        } else {
-          console.error('Error submitting buy details');
-          // Handle error cases
-        }
+        
+        });
+      if (response.status === 200) {
+        console.log('Property added successfully:', response.data);
+        // Reset form after successful submission
+        setPropertyDetails({
+          property_name: '',
+          property_type: '',
+          bhk_type: '',
+          buildup_area: 0,
+          furnishing_type: '',
+          floor: 0,
+          listing_date: '',
+          locality: '',
+          landmark_street: '',
+          city: '',
+          state: '',
+          pincode: 0,
+          description: '',
+          operation: '',
+          expected_rate: 0,
+          expected_rent: 0,
+          expected_deposit: 0,
+          preferred_tenants: '',
+        });
       }
-
-      setPropertyDetails({
-        property_name: '',
-        property_type: '',
-        bhk_type: '',
-        buildup_area: '',
-        furnishing_type: '',
-        floor: '',
-        listing_date: '',
-        locality: '',
-        landmark_street: '',
-        city: '',
-        state: '',
-        pincode: '',
-        description: '',
-        post_type: '',
-        expected_rent: '',
-        expected_deposit: '',
-        preferred_tenants: '',
-        expected_rate: '',
-      });
+    } catch (error) {
+      console.error('Error adding property:', error);
     }
   };
-  
+
   return (
-    <div className="property-form">
+    <div className="property-post">
       <h2>Post Property</h2>
       <form onSubmit={handleSubmit}>
         <label>Property Name:</label>
@@ -111,6 +104,7 @@ const PostProperty = () => {
           onChange={handleChange}
           required
         />
+
         <label>Property Type:</label>
         <input
           type="text"
@@ -121,43 +115,43 @@ const PostProperty = () => {
         />
 
         <label>BHK Type:</label>
-          <select
-            name="bhk_type"
-            value={propertyDetails.bhk_type}
-            onChange={handleChange}
-            required
-            className="input-field"
-          >
-            <option value="">Select Bhk Type</option>
-            <option value="1bhk">1 Bhk</option>
-            <option value="2bhk">2 Bhk</option>
-            <option value="3bhk">3 Bhk</option>
-            {/* Add more options as needed */}
-          </select>
+        <select
+          name="bhk_type"
+          value={propertyDetails.bhk_type}
+          onChange={handleChange}
+          required
+          className="input-field"
+        >
+          <option value="">Select Bhk Type</option>
+          <option value="1bhk">1 Bhk</option>
+          <option value="2bhk">2 Bhk</option>
+          <option value="3bhk">3 Bhk</option>
+          {/* Add more options as needed */}
+        </select>
         <label>Buildup Area:</label>
         <input
-          type="text"
+          type="number"
           name="buildup_area"
           value={propertyDetails.buildup_area}
           onChange={handleChange}
           required
         />
-       <label>Furnishing Type:</label>
-            <select
-              name="furnishing_type"
-              value={propertyDetails.furnishing_type}
-              onChange={handleChange}
-              required
-              className="input-field"
-            >
-              <option value="">Select Furnishing Type</option>
-              <option value="unfurnished">Unfurnished</option>
-              <option value="semi-furnished">Semi-Furnished</option>
-              <option value="fully-furnished">Fully Furnished</option>
-            </select>
+        <label>Furnishing Type:</label>
+        <select
+          name="furnishing_type"
+          value={propertyDetails.furnishing_type}
+          onChange={handleChange}
+          required
+          className="input-field"
+        >
+          <option value="">Select Furnishing Type</option>
+          <option value="unfurnished">Unfurnished</option>
+          <option value="semi-furnished">Semi-Furnished</option>
+          <option value="fully-furnished">Fully Furnished</option>
+        </select>
         <label>Floor:</label>
         <input
-          type="text"
+          type="number"
           name="floor"
           value={propertyDetails.floor}
           onChange={handleChange}
@@ -179,14 +173,14 @@ const PostProperty = () => {
           onChange={handleChange}
           required
         />
-        <label>Landmart/Street:</label>
+        <label>Landmark/Street:</label>
         <input
           type="text"
           name="landmark_street"
           value={propertyDetails.landmark_street}
           onChange={handleChange}
           required
-        /> 
+        />
         <label>City:</label>
         <input
           type="text"
@@ -205,7 +199,7 @@ const PostProperty = () => {
         />
         <label>Pincode:</label>
         <input
-          type="text"
+          type="number"
           name="pincode"
           value={propertyDetails.pincode}
           onChange={handleChange}
@@ -219,90 +213,64 @@ const PostProperty = () => {
           onChange={handleChange}
           required
         />
- <form onSubmit={handleSubmit}>
-        {step === 1 && (
+        <div className="operation">
+          <label>Operation:</label>
+          <select
+            name="operation"
+            value={propertyDetails.operation}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Operation</option>
+            <option value="buy">buy</option>
+            <option value="rent">rent</option>
+          </select>
+        </div>
+        
+
+        {propertyDetails.operation === 'buy' && (
           <>
-            {/* Property details fields */}
-            <label>Property Name:</label>
+            <label>Expected Rate:</label>
             <input
-              type="text"
-              name="property_name"
-              value={propertyDetails.property_name}
+              type="number"
+              name="expected_rate"
+              value={propertyDetails.expected_rate}
               onChange={handleChange}
               required
             />
-            {/* Add more property details fields */}
-            <button type="button" onClick={handleNext}>
-              Next
-            </button>
           </>
         )}
 
-        {step === 2 && (
+        {propertyDetails.operation === 'rent' && (
           <>
-            {/* Post property for */}
-            <div className="form-group">
-              <label>Post property for:</label>
-              <select
-                name="post_type"
-                value={propertyDetails.post_type}
-                onChange={handleChange}
-                required
-              >
-                <option value="">Select Post Type</option>
-                <option value="rent">Rent</option>
-                <option value="buy">Buy</option>
-              </select>
-            </div>
-            
-            {/* Rent details */}
-            {propertyDetails.post_type === 'rent' && (
-              <>
-                <label>Expected Rent:</label>
-                <input
-                  type="text"
-                  name="expected_rent"
-                  value={propertyDetails.expected_rent}
-                  onChange={handleChange}
-                  required
-                />
-                <label>Expected Deposit:</label>
-                <input
-                  type="text"
-                  name="expected_deposit"
-                  value={propertyDetails.expected_deposit}
-                  onChange={handleChange}
-                  required
-                />
-                <label>Preferred Tenants:</label>
-                <input
-                  type="text"
-                  name="preferred_tenants"
-                  value={propertyDetails.preferred_tenants}
-                  onChange={handleChange}
-                  required
-                />
-              </>
-            )}
-            
-            {/* Buy details */}
-            {propertyDetails.post_type === 'buy' && (
-              <>
-                <label>Expected Rate:</label>
-                <input
-                  type="text"
-                  name="expected_rate"
-                  value={propertyDetails.expected_rate}
-                  onChange={handleChange}
-                  required
-                />
-              </>
-            )}
+            <label>Expected Rent:</label>
+            <input
+              type="number"
+              name="expected_rent"
+              value={propertyDetails.expected_rent}
+              onChange={handleChange}
+              required
+            />
+            <label>Expected Deposit:</label>
+            <input
+              type="number"
+              name="expected_deposit"
+              value={propertyDetails.expected_deposit}
+              onChange={handleChange}
+              required
+            />
+            <label>Preferred Tenants:</label>
+            <input
+              type="text"
+              name="preferred_tenants"
+              value={propertyDetails.preferred_tenants}
+              onChange={handleChange}
+              required
+             />
+             </>
+              )}
 
-            <button type="submit">Post Property</button>
-          </>
-        )}
-      </form>
+        <button type="submit">Post Property</button>
       </form>
     </div>
   );
