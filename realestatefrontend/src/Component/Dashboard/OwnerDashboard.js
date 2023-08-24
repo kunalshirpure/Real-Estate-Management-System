@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import axios from 'axios';
 import './OwnerDashboard.css'; // Import your CSS file
 
 const OwnerDashboard = () => {
   const [ownedProperties, setOwnedProperties] = useState([]);
-  
-  // Simulated data, replace with actual data from your API or database
-  const mockOwnedProperties = [
-    { id: 1, title: 'Beautiful House', location: 'City A, State B' },
-    { id: 2, title: 'Luxury Apartment', location: 'City X, State Y' },
-    // ... add more properties
-  ];
-
   useEffect(() => {
-    // Simulated API call to fetch owned property data
-    setOwnedProperties(mockOwnedProperties);
+    // Fetch properties from the Spring Boot API
+    axios.get('http://localhost:8585/properties') // Replace with your API URL
+      .then(response => {
+        setOwnedProperties(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching properties:', error);
+      });
   }, []);
 
   const handleDeleteProperty = (propertyId) => {
@@ -35,8 +34,9 @@ const OwnerDashboard = () => {
         <h3>Your Posted Properties</h3>
         <ul>
           {ownedProperties.map((property) => (
-            <li key={property.id}>
-              {property.title} - {property.location}
+            <li key={property.property_id}>
+              <p> {property.property_name}</p>
+             <p>{property.location}</p>
               <button onClick={() => handleDeleteProperty(property.id)}>Delete</button>
               <button onClick={() => handleUpdateProperty(property.id)}>Update</button>
             </li>
@@ -53,6 +53,38 @@ const OwnerDashboard = () => {
 };
 
 export default OwnerDashboard;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
