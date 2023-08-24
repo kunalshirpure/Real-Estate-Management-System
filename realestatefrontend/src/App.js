@@ -8,6 +8,7 @@ import SignUp from "./Component/SignUp/SignUp";
 import PropertyPage from "./Component/Properties/PropertyPage";
 import PostProperty from "./Component/Properties/PostProperty";
 import AdminPage from "./Component/Admin/AdminPage";
+import OwnerDashboard from "./Component/Dashboard/OwnerDashboard"
 function App() {
   return (
     <Router>
@@ -20,6 +21,8 @@ function App() {
           <Route path="/properties" element={<PropertyPage />} />
           <Route path="/postproperty" element={<PostProperty />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/owner" element={<OwnerDashboard />} />
+          
           {/* Add more routes for other pages */}
         </Routes>
         <Footer></Footer> 

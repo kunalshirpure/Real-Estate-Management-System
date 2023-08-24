@@ -1,32 +1,37 @@
-import React, { useState } from 'react';
-import './PropertyPage.css'; // Import your CSS file
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import "./PropertyPage.css";
 
 const PropertyPage = () => {
+  const location = useLocation();
+  const { location: searchLocation, choice: searchChoice } = location.state;
+
   const [properties, setProperties] = useState([]);
 
-  // Simulated data, replace with actual property data from your API or database
-  const mockProperties = [
-    { id: 1, title: 'Beautiful House', location: 'City A, State B', type: 'House' },
-    { id: 2, title: 'Luxury Apartment', location: 'City X, State Y', type: 'Apartment' },
-    // ... add more properties
-  ];
-
-  // Simulated function to fetch property data (replace with actual API call)
-  const fetchProperties = () => {
-    // Set the fetched properties to the state
-    setProperties(mockProperties);
-  };
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8585/properties/search/${searchLocation}`)
+      .then((response) => {
+        setProperties(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching properties:", error);
+      });
+  }, [searchLocation]);
 
   return (
     <div className="property-page">
       <h2>Properties</h2>
-      <button onClick={fetchProperties}>Fetch Properties</button>
+
       <div className="property-grid">
         {properties.map((property) => (
-          <div key={property.id} className="property-card">
-            <h3>{property.title}</h3>
-            <p>{property.location}</p>
-            <p>Type: {property.type}</p>
+          <div key={property.property_id} className="property-card">
+            <p>{property.property_name}</p>
+            <h3>{property.bhk_type}</h3>
+
+            <p>{property.buildup_area}</p>
+            <p>{property.city}</p>
           </div>
         ))}
       </div>

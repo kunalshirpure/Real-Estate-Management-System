@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './PostProperty.css'; // Import your CSS file for styling
 
@@ -269,8 +270,10 @@ const PostProperty = () => {
              />
              </>
               )}
-
-        <button type="submit">Post Property</button>
+        <div>
+        <button type="submit"  >Post Property</button>
+        <Link to="/owner"/>
+        </div>
       </form>
     </div>
   );

@@ -80,11 +80,13 @@ public class PropertyController {
 
     //http://localhost:8989/properties/search?city=Metroville
  
-    @GetMapping("/properties/search")
-    public ResponseEntity<List<Property>> searchPropertiesByCity(@RequestParam String city) {
+  
+    @GetMapping("/properties/search/{city}")
+    public ResponseEntity<List<Property>> searchPropertiesByCity(@PathVariable String city) {
         List<Property> properties = propertyservice.getPropertiesByCity(city);
         return ResponseEntity.ok(properties);
     }
+        
         
     
         
