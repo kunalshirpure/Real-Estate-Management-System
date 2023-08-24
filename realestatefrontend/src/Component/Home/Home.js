@@ -24,6 +24,7 @@ const Home = () => {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
+          
           <select value={choice} onChange={(e) => setChoice(e.target.value)}>
             <option value="">Select choice</option>
             <option value="buy">Buy</option>

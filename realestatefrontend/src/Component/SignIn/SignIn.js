@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import './SignIn.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -32,6 +34,17 @@ const SignIn = () => {
       if (response.data) {
         console.log('Login successful:', response.data);
         // Handle successful login, such as storing tokens or redirecting to a dashboard
+          // Assuming response.data contains the user's role information (consumer, owner, admin)
+          if (response.data.role === "user") {
+            // Navigate to the home page for consumers
+            navigate("/");
+          } else if (response.data.role === "owner") {
+            // Navigate to the owner dashboard
+            navigate("/owner");
+          } else if (response.data.role === "admin") {
+            // Navigate to the admin dashboard
+            navigate("/admin");
+          }
       } else {
         setErrorMessage('Invalid username or password');
       }

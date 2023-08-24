@@ -20,8 +20,9 @@ const AdminPage = () => {
 
   useEffect(() => {
     // Simulated API call to fetch property and user data
-    setProperties(mockProperties);
     setUsers(mockUsers);
+    setProperties(mockProperties);
+    
   }, []);
 
   const handleDeleteProperty = (propertyId) => {

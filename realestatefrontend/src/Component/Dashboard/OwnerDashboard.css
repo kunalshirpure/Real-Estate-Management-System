@@ -7,7 +7,7 @@
   .owned-properties,
   .add-property {
     margin-top: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid #ea5b5b;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -47,7 +47,7 @@
   button {
     background-color: #007bff;
     color: #fff;
-    border: none;
+    border: 0.5px;
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;

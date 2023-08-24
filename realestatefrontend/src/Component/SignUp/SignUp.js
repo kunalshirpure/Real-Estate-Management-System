@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './SignUp.css';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
@@ -11,9 +11,9 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [contact, setContact] = useState('');
   const [address, setAddress] = useState('');
+  const [role, setRole] = useState('');
 
-
-  const notify = () => toast("Wow so easy!");
+  const notify = () => toast("Please Enter!");
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -24,7 +24,7 @@ const SignUp = () => {
       password: password,
       contact: contact,
       address: address,
-      role: 'user'
+      role: role
     };
 
     try {
@@ -44,6 +44,7 @@ const SignUp = () => {
     setPassword('');
     setContact('');
     setAddress('');
+    setRole('');
   };
 
   return (
@@ -51,6 +52,18 @@ const SignUp = () => {
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
+        <label>Role</label>
+        <select
+          name="role"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <option value="">Select Role</option>
+          <option value="admin">Admin</option>
+          <option value="owner">Owner</option>
+          <option value="user">User</option>
+        </select>
+         
           <label>First Name:</label>
           <input
             type="text"

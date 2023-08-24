@@ -15,16 +15,28 @@ const OwnerDashboard = () => {
         console.error('Error fetching properties:', error);
       });
   }, []);
+ 
 
   const handleDeleteProperty = (propertyId) => {
     // Implement property deletion logic
+    try {
+      axios.delete(`http://localhost:8585/deleteproperty/${propertyId}`); // Replace with your DELETE API endpoint
+        ownedProperties(); // Fetch updated properties after deletion
+    } catch (error) {
+      console.error('Error deleting property:', error);
+    }
     const updatedProperties = ownedProperties.filter(property => property.id !== propertyId);
     setOwnedProperties(updatedProperties);
   };
 
   const handleUpdateProperty = (propertyId) => {
-    // Implement property update logic
-    console.log('Update property:', propertyId);
+    try {
+      const updatedProperty = /* create updated property object with new data */
+       axios.put(`http://localhost:8585/propertyupdate/${propertyId}`, updatedProperty); // Replace with your PUT API endpoint
+      ownedProperties(); // Fetch updated properties after update
+    } catch (error) {
+      console.error('Error updating property:', error);
+    }
   };
 
   return (
