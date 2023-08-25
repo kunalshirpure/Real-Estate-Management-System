@@ -25,7 +25,4 @@ public interface PropertyDao extends JpaRepository<Property,Integer>
 	List<Property> findByLocality_CityAndLocality_StateAndPropertyType(String city, String state, String property_type);
 	
 	
-	
-	
-	
 }

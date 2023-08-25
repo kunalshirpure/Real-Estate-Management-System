@@ -4,6 +4,7 @@ package com.pms.RealEstate.dto;
 
 public class PropertyDto {
   
+	private int property_id;
 	private String property_name;
     private String property_type;
     private String bhk_type;
@@ -22,18 +23,17 @@ public class PropertyDto {
     private double expected_rent; // only for renting
     private double expected_deposit; // only for renting
     private String preferred_tenants; // only for renting
-
-    
+    private byte[] image_1;
     
     
     public PropertyDto() {
 		super();
 	}
 
-	public PropertyDto(String property_name, String property_type, String bhk_type, double buildup_area,
+	public PropertyDto(int property_id,String property_name, String property_type, String bhk_type, double buildup_area,
 			String furnishing_type, int floor, String listing_date, String locality, String landmark_street, String city,
 			String state, int pincode, String description, String operation, double expected_rate, double expected_rent,
-			double expected_deposit, String preferred_tenants) {
+			double expected_deposit, String preferred_tenants,byte[] image_1) {
 		super();
 		this.property_name = property_name;
 		this.property_type = property_type;
@@ -54,7 +54,7 @@ public class PropertyDto {
 		this.expected_deposit = expected_deposit;
 		this.preferred_tenants = preferred_tenants;
   
-		
+		this.image_1=image_1;
 		
 		// Getters and setters
 }
@@ -310,6 +310,16 @@ public class PropertyDto {
 	public void setPreferred_tenants(String preferred_tenants) {
 		this.preferred_tenants = preferred_tenants;
 	}
+	
+	
+
+	public byte[] getImage_1() {
+		return image_1;
+	}
+
+	public void setImage_1(byte[] image_1) {
+		this.image_1 = image_1;
+	}
 
 	@Override
 	public String toString() {
@@ -320,6 +330,14 @@ public class PropertyDto {
 				+ description + ", operation=" + operation + ", expected_rate=" + expected_rate + ", expected_rent="
 				+ expected_rent + ", expected_deposit=" + expected_deposit + ", preferred_tenants=" + preferred_tenants
 				+ "]";
+	}
+
+	public int getProperty_id() {
+		return property_id;
+	}
+
+	public void setProperty_id(int property_id) {
+		this.property_id = property_id;
 	}
 	
 

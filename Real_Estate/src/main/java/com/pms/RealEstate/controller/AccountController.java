@@ -7,8 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.pms.RealEstate.dto.LoginDto;
 import com.pms.RealEstate.model.Accounts;
 import com.pms.RealEstate.service.AccountService;
@@ -20,8 +22,6 @@ public class AccountController {
 
 	@Autowired
 	AccountService accountservice;
-
-      
 	
 	@PostMapping("/register")
     public ResponseEntity<Accounts> registerUser(@RequestBody Accounts accounts) {
@@ -42,6 +42,21 @@ public class AccountController {
         List<Accounts> accounts = accountservice.getAllAccounts();
         return ResponseEntity.ok(accounts);
     }
+	
+	@PutMapping("/forgot")
+	public ResponseEntity<String> updateUser(@RequestBody Accounts a){
+		System.out.println(a);
+		boolean status=accountservice.update(a);
+		if(status)
+			return ResponseEntity.ok("success");
+		
+		return ResponseEntity.ok("User not found");
+	
+	}
+	
+	
+	
+	
 }
 	
 	

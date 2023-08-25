@@ -34,7 +34,8 @@ public class Property {
     @OneToOne(mappedBy = "property", cascade = CascadeType.ALL)
     private Buying buying;
 
-    
+    @OneToOne(mappedBy = "property", cascade = CascadeType.ALL)
+    private Images images;
     
     
     
@@ -44,7 +45,7 @@ public class Property {
 
 	public Property(int property_id, String property_name, String property_type, String bhk_type, double buildup_area,
 			String furnishing_type, int floor, String listing_date, String locality, String landmark_street, String city,
-			String state, int pincode, String description, Rental rental, Buying buying) {
+			String state, int pincode, String description, Rental rental, Buying buying,Images images) {
 		super();
 		this.property_id = property_id;
 		this.property_name = property_name;
@@ -62,6 +63,7 @@ public class Property {
 		this.description = description;
 		this.rental = rental;
 		this.buying = buying;
+		this.images=images;
 	}
 
 	public int getProperty_id() {
@@ -190,6 +192,14 @@ public class Property {
 
 	public void setBuying(Buying buying) {
 		this.buying = buying;
+	}
+    
+	public Images getImages() {
+		return images;
+	}
+
+	public void setImages(Images images) {
+		this.images = images;
 	}
 
 	@Override

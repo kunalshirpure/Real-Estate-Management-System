@@ -15,4 +15,8 @@ public interface AccountService {
 
 	Accounts verifyaccount(LoginDto userlogin);
 
+	boolean update(Accounts a);
+
+	
+
 }

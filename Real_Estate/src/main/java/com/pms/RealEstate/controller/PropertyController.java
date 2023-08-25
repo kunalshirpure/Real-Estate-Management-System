@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.pms.RealEstate.dto.PropertyDto;
 import com.pms.RealEstate.model.Buying;
 import com.pms.RealEstate.model.Property;
@@ -62,9 +60,8 @@ public class PropertyController {
         try {
             propertyservice.addProperty1(propertyDTO);
             return ResponseEntity.ok("Property added successfully.");
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body("Invalid request: " + e.getMessage());
-        } catch (Exception e) {
+            }
+        catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
         }
     }
@@ -79,16 +76,25 @@ public class PropertyController {
     
 
     //http://localhost:8989/properties/search?city=Metroville
+    
+    
+    @PutMapping("/update")
+    public ResponseEntity<String> updatePropertyDetails(@RequestBody PropertyDto propertyDto) {
+        propertyservice.updatePropertyDetails(propertyDto);
+        return ResponseEntity.ok("Property details updated successfully.");
+    }
+
+    
+    
+    
  
-  
     @GetMapping("/properties/search/{city}")
     public ResponseEntity<List<Property>> searchPropertiesByCity(@PathVariable String city) {
         List<Property> properties = propertyservice.getPropertiesByCity(city);
         return ResponseEntity.ok(properties);
     }
         
-        
-    
+   
         
     @GetMapping("/properties/search/{city}/{state}/{propertyType}")
     public ResponseEntity<List<Property>> searchProperties(
@@ -102,11 +108,7 @@ public class PropertyController {
         
        
         
-    @PutMapping("/propertyupdate/{id}")
-	public ResponseEntity<String> updatePropertyDetails(@RequestBody Property p) {
-		propertyservice.updateproperty(p);
-		return ResponseEntity.ok("modified successfully");
-    }
+    
     
     
   
@@ -123,4 +125,6 @@ public class PropertyController {
 	     {
 	        return buyingservice.getAllBuyingProperties();
 	     }	
+	
+	
 }

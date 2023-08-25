@@ -1,5 +1,8 @@
 package com.pms.RealEstate.model;
 
+import java.sql.Blob;
+import java.util.Arrays;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,36 +16,56 @@ public class Images {
     @JoinColumn(name = "property_id")
     private Property property;
 
-    private String image_1;
-    private String image_2;
-    private String image_3;
-    private String image_4;
-    private String image_5;
-    
-    
+    @Lob
+    private byte[] image_1;
+ 
 	public Images() {
 		super();
 	}
+	
+	
 
-
-	public Images(int image_id, Property property, String image_1, String image_2, String image_3, String image_4,
-			String image_5) {
+	public Images(int image_id, Property property, byte[] image_1) {
 		super();
 		this.image_id = image_id;
 		this.property = property;
 		this.image_1 = image_1;
-		this.image_2 = image_2;
-		this.image_3 = image_3;
-		this.image_4 = image_4;
-		this.image_5 = image_5;
 	}
+
+
+
+	public int getImage_id() {
+		return image_id;
+	}
+
+	public void setImage_id(int image_id) {
+		this.image_id = image_id;
+	}
+
+	public Property getProperty() {
+		return property;
+	}
+
+	public void setProperty(Property property) {
+		this.property = property;
+	}
+
+	public byte[] getImage_1() {
+		return image_1;
+	}
+
+	public void setImage_1(byte[] image_1) {
+		this.image_1 = image_1;
+	}
+
 
 
 	@Override
 	public String toString() {
-		return "Images [image_id=" + image_id + ", property=" + property + ", image_1=" + image_1 + ", image_2="
-				+ image_2 + ", image_3=" + image_3 + ", image_4=" + image_4 + ", image_5=" + image_5 + "]";
+		return "Images [image_id=" + image_id + ", property=" + property + ", image_1=" + Arrays.toString(image_1)
+				+ "]";
 	}
-	
-		
+
+
+		 
 }
