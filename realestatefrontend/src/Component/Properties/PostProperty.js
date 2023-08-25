@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PostProperty.css'; // Import your CSS file for styling
 
 
 const PostProperty = () => {
+  const navigate = useNavigate();
+
   const [propertyDetails, setPropertyDetails] = useState({
     property_name: '',
     property_type: '',
@@ -91,6 +93,9 @@ const PostProperty = () => {
     } catch (error) {
       console.error('Error adding property:', error);
     }
+
+    navigate('/owner');
+
   };
 
   return (
@@ -272,7 +277,7 @@ const PostProperty = () => {
               )}
         <div>
         <button type="submit"  >Post Property</button>
-        <Link to="/owner"/>
+        
         </div>
       </form>
     </div>

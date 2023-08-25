@@ -9,21 +9,22 @@ const SignIn = () => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
 
+
   const handleUsernameChange = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setUsername(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setPassword(event.target.value);
   };
 
   const handleSignIn = async (event) => {
     event.preventDefault();
  
-   console.log(username);
-   console.log(password);
+  //  console.log(username);
+  //  console.log(password);
 
     try {
       const response = await axios.post('http://localhost:8585/login', {
@@ -31,18 +32,31 @@ const SignIn = () => {
         "password":password,
       });
 
+     
+
       if (response.data) {
         console.log('Login successful:', response.data);
         // Handle successful login, such as storing tokens or redirecting to a dashboard
           // Assuming response.data contains the user's role information (consumer, owner, admin)
+         
+        
           if (response.data.role === "user") {
             // Navigate to the home page for consumers
+            const userId = response.data.email_id;
+            sessionStorage.setItem('loggedIn', 'true');
+            sessionStorage.setItem('userId', userId);
             navigate("/");
           } else if (response.data.role === "owner") {
             // Navigate to the owner dashboard
+            const userId = response.data.email_id;
+            sessionStorage.setItem('loggedIn', 'true');
+            sessionStorage.setItem('userId', userId);
             navigate("/owner");
           } else if (response.data.role === "admin") {
             // Navigate to the admin dashboard
+            const userId = response.data.email_id;
+            sessionStorage.setItem('loggedIn', 'true');
+            sessionStorage.setItem('userId', userId);
             navigate("/admin");
           }
       } else {

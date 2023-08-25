@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './AdminPage.css'; // Import your CSS file
 
 const AdminPage = () => {
   const [properties, setProperties] = useState([]);
   const [users, setUsers] = useState([]);
 
-  // Simulated data, replace with actual data from your API or database
+ 
   useEffect(() => {
     // Simulated API call to fetch property and user data
     axios.get('http://localhost:8585/get') // Replace with your API URL

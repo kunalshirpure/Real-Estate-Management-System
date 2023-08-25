@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link,useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./PropertyPage.css";
 
 const PropertyPage = () => {
+  const navigate = useNavigate();
   const location = useLocation();
   const { location: searchLocation, choice: searchChoice } = location.state;
 
@@ -20,6 +21,10 @@ const PropertyPage = () => {
       });
   }, [searchLocation]);
 
+  const handlePropertyClick = (propertyId) => {
+    navigate(`/property/${propertyId}`);
+  };
+  
   return (
     <div className="property-page">
       <h2>Properties</h2>
@@ -29,9 +34,12 @@ const PropertyPage = () => {
           <div key={property.property_id} className="property-card">
             <p>{property.property_name}</p>
             <h3>{property.bhk_type}</h3>
-
             <p>{property.buildup_area}</p>
             <p>{property.city}</p>
+            <div className="property-buttons">
+            {/* <Link to={`/property/${property.id}`}>{property.title}</Link> */}
+            <button onClick={() => handlePropertyClick(property.property_id)}>View Details</button>
+            </div>
           </div>
         ))}
       </div>

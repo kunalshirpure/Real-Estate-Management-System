@@ -9,7 +9,10 @@ const Home = () => {
   const [choice, setChoice] = useState("");
 
   const HandleSearch = () => {
+    if(location === ""){navigate('/')}
+    else{
     navigate("/properties", { state: { location, choice } });
+    }
   };
 
   return (

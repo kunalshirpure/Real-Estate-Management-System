@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './SignUp.css';
 import axios from 'axios';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -14,6 +16,8 @@ const SignUp = () => {
   const [role, setRole] = useState('');
 
   const notify = () => toast("Please Enter!");
+
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,6 +39,8 @@ const SignUp = () => {
       console.error('Registration error:', error);
       window.alert('Registration failed. Please try again.');
     }
+
+    navigate('/signin');
   };
 
   const clearFormFields = () => {
