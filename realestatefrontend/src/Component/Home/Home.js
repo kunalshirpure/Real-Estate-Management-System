@@ -1,18 +1,29 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Home.css"; // Import your CSS file for styling
-
+import '../Home/Home.css'; // Import your CSS file for styling
+import pune from '../images/pune.jpg';
+import mumbai from '../images/chennai.jpg'
+import delhi from '../images/delhi.jpg'
 const Home = () => {
   const navigate = useNavigate();
 
   const [location, setLocation] = useState("");
   const [choice, setChoice] = useState("");
 
-  const HandleSearch = () => {
-    if(location === ""){navigate('/')}
-    else{
+  const cities = ["Pune", "Mumbai", "Bangalore"];
+
+  const cityImages = {
+    Pune: pune,
+    Mumbai: mumbai,
+    Bangalore: delhi
+  };
+
+  const handleCityClick = (city) => {
+    navigate("/properties", { state: { location: city, choice } });
+  };
+
+  const handleSearch = () => {
     navigate("/properties", { state: { location, choice } });
-    }
   };
 
   return (
@@ -33,7 +44,20 @@ const Home = () => {
             <option value="buy">Buy</option>
             <option value="rent">Rent</option>
           </select>
-          <button onClick={HandleSearch}>Search</button>
+          
+          <button onClick={handleSearch}>Search</button>
+        </div>
+        <div className="city-list">
+          {cities.map((city, index) => (
+            <button
+            key={index}
+            className={`city-button ${city === "Pune" ? "pune-button" : ""} ${city === "Bangalore" ? "bangalore-button" : ""}`}
+            onClick={() => handleCityClick(city)}
+          >
+            <img src={cityImages[city]} alt={city} />
+            <span>{city}</span>
+          </button>
+          ))}
         </div>
       </div>
     </div>

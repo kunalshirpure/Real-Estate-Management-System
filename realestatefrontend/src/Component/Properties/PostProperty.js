@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './PostProperty.css'; // Import your CSS file for styling
 
 
 const PostProperty = () => {
-  const navigate = useNavigate();
-
   const [propertyDetails, setPropertyDetails] = useState({
     property_name: '',
     property_type: '',
@@ -39,7 +37,6 @@ const PostProperty = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    window.alert("Axios method")
     try {
       const response = await axios.post('http://localhost:8585/api/properties',
 
@@ -93,9 +90,6 @@ const PostProperty = () => {
     } catch (error) {
       console.error('Error adding property:', error);
     }
-
-    navigate('/owner');
-
   };
 
   return (
@@ -165,7 +159,7 @@ const PostProperty = () => {
         />
         <label>Listing Date:</label>
         <input
-          type="text"
+          type="date"
           name="listing_date"
           value={propertyDetails.listing_date}
           onChange={handleChange}
@@ -219,7 +213,7 @@ const PostProperty = () => {
           onChange={handleChange}
           required
         />
-        <div className="operation">
+        
           <label>Operation:</label>
           <select
             name="operation"
@@ -228,11 +222,12 @@ const PostProperty = () => {
             required
           >
             <option value="">Select Operation</option>
-            <option value="buy">buy</option>
+            <option value="Buy">buy</option>
             <option value="rent">rent</option>
           </select>
-        </div>
-        
+       
+
+
 
         {propertyDetails.operation === 'buy' && (
           <>
@@ -265,19 +260,22 @@ const PostProperty = () => {
               onChange={handleChange}
               required
             />
+
             <label>Preferred Tenants:</label>
-            <input
-              type="text"
+            <select
               name="preferred_tenants"
               value={propertyDetails.preferred_tenants}
               onChange={handleChange}
               required
-             />
+             ><option value="">Select Operation</option>
+             <option value="student">Student</option>
+             <option value="family">Family</option>
+           </select>
              </>
               )}
         <div>
         <button type="submit"  >Post Property</button>
-        
+        <Link to="/owner"/>
         </div>
       </form>
     </div>
