@@ -54,8 +54,9 @@ const SignUp = () => {
   };
 
   return (
+
     <div className="sign-up">
-      <h2>Sign Up</h2>
+      <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
         <label>Role</label>
@@ -123,7 +124,7 @@ const SignUp = () => {
             required
           />
         </div>
-        <button onClick={notify}>Sign Up</button>
+        <button className="signup-button" onClick={notify}>Sign Up</button>
 
       </form>
     </div>

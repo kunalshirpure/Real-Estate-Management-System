@@ -15,6 +15,8 @@ const PropertyPage = () => {
       .get(`http://localhost:8585/properties/search/${searchLocation}`)
       .then((response) => {
         setProperties(response.data);
+         
+  console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching properties:", error);
@@ -32,13 +34,21 @@ const PropertyPage = () => {
       <div className="property-grid">
         {properties.map((property) => (
           <div key={property.property_id} className="property-card">
-            <p>{property.property_name}</p>
-            <h3>{property.bhk_type}</h3>
-            <p>{property.buildup_area}</p>
-            <p>{property.city}</p>
+            <h3 className="property-title">
+              {property.bhk_type} Flat In {property.location} {property.landmark_street}, {property.city}, {property.state}
+            </h3>
+            <h3 className="property-name">{property.property_name}</h3>
+            <p className="property-info">
+              Property Type: {property.property_type}<br />
+              Furnishing:  {property.furnishing_type}<br />
+              Builtup Area: {property.buildup_area}<br />
+              {/* Expected Rent: {property.rental.expected_rent}<br /> */}
+              {/* Expected Deposit: {property.rental.expected_deposit}<br /> */}
+              {/* Preferred Tenants: {property.rental.preferred_tenants} */}
+          
+            <p className="listing-date">Available from: {property.listing_date}</p></p>
             <div className="property-buttons">
-            {/* <Link to={`/property/${property.id}`}>{property.title}</Link> */}
-            <button onClick={() => handlePropertyClick(property.property_id)}>View Details</button>
+              <button onClick={() => handlePropertyClick(property.property_id)}>View Details</button>
             </div>
           </div>
         ))}

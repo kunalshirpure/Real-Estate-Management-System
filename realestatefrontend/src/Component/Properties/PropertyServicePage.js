@@ -33,6 +33,13 @@ const PropertyServicePage = () => {
       <div className="property-details">
         <h3>Property Info</h3>
         <p>Title: {propertyDetails.property_name}</p>
+        <p>BHK-TYPE : {propertyDetails.bhk_type}</p>
+        <p>BuildUp Area : {propertyDetails.buildup_area}</p>
+        <p>City : {propertyDetails.city}</p>
+        <p>Furnished Type : {propertyDetails.furnishing_type}</p>
+        <p>Listing Date : {propertyDetails.listing_date}</p>
+        <p>State: {propertyDetails.state}</p>
+        <p>Pincode : {propertyDetails.pincode}</p>
         <p>Description: {propertyDetails.description}</p>
         {/* Add more property details */}
       </div>
@@ -47,3 +54,4 @@ const PropertyServicePage = () => {
 };
 
 export default PropertyServicePage;
+

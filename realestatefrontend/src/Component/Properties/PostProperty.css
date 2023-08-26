@@ -9,10 +9,10 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
 
-.property-post h2 {
+.property-post h1 {
   text-align: center;
   margin-bottom: 20px;
-  color: #333;
+  color: black;
 }
 
 .property-post label {

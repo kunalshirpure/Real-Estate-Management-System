@@ -2,20 +2,22 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import '../Home/Home.css'; // Import your CSS file for styling
 import pune from '../images/pune.jpg';
-import mumbai from '../images/chennai.jpg'
+import mumbai from '../images/mumbai.jpg'
 import delhi from '../images/delhi.jpg'
+import banglore from '../images/Banglore.jpg'
 const Home = () => {
   const navigate = useNavigate();
 
   const [location, setLocation] = useState("");
   const [choice, setChoice] = useState("");
 
-  const cities = ["Pune", "Mumbai", "Bangalore"];
+  const cities = ["Pune", "Mumbai", "Delhi","Banglore"]
 
   const cityImages = {
     Pune: pune,
     Mumbai: mumbai,
-    Bangalore: delhi
+    Delhi: delhi,
+    Banglore: banglore
   };
 
   const handleCityClick = (city) => {
@@ -51,7 +53,7 @@ const Home = () => {
           {cities.map((city, index) => (
             <button
             key={index}
-            className={`city-button ${city === "Pune" ? "pune-button" : ""} ${city === "Bangalore" ? "bangalore-button" : ""}`}
+            className={`city-button ${city === "Pune" ? "pune-button" : ""} `}
             onClick={() => handleCityClick(city)}
           >
             <img src={cityImages[city]} alt={city} />

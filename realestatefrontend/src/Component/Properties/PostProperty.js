@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './PostProperty.css'; // Import your CSS file for styling
 
-
 const PostProperty = () => {
+  const navigate=useNavigate();
   const [propertyDetails, setPropertyDetails] = useState({
     property_name: '',
     property_type: '',
@@ -90,11 +90,12 @@ const PostProperty = () => {
     } catch (error) {
       console.error('Error adding property:', error);
     }
+    navigate('/owner')
   };
 
   return (
     <div className="property-post">
-      <h2>Post Property</h2>
+     <h1>Post Property</h1>
       <form onSubmit={handleSubmit}>
         <label>Property Name:</label>
         <input
@@ -222,8 +223,8 @@ const PostProperty = () => {
             required
           >
             <option value="">Select Operation</option>
-            <option value="Buy">buy</option>
-            <option value="rent">rent</option>
+            <option value="buy">Buy</option>
+            <option value="rent">Rent</option>
           </select>
        
 

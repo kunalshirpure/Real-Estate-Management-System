@@ -86,11 +86,12 @@ public class PropertyController {
 
     
     
-    
+    	
  
     @GetMapping("/properties/search/{city}")
     public ResponseEntity<List<Property>> searchPropertiesByCity(@PathVariable String city) {
         List<Property> properties = propertyservice.getPropertiesByCity(city);
+        System.out.println(city);
         return ResponseEntity.ok(properties);
     }
         

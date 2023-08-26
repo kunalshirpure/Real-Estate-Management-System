@@ -76,7 +76,7 @@ const SignIn = () => {
   return (
     <div className="signin-container">
       <form className="signin-form" onSubmit={handleSignIn}>
-        <h2>Sign In</h2>
+        <h1>Sign In</h1>
         <div className="form-group">
           <label htmlFor="username">Username</label>
           <input
