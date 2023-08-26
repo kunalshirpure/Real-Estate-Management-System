@@ -44,8 +44,14 @@ const AdminPage = () => {
   };
 
   const handleDeleteUser = (userId) => {
-    // Implement user deletion logic
+   
     console.log('Delete user:', userId);
+    try {
+      axios.delete(`http://localhost:8585/deleteproperty/${userId}`); // Replace with your DELETE API endpoint
+      properties(); // Fetch updated properties after deletion
+    } catch (error) {
+      console.error("Error deleting property:", error);
+    }
   };
 
   return (

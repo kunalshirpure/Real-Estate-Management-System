@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -55,7 +56,15 @@ public class AccountController {
 	}
 	
 	
-	
+	@PutMapping("update/{emailId}")
+    public ResponseEntity<String> updateAccountDetails(@PathVariable String emailId,@RequestBody Accounts updatedAccount) {
+        boolean updated = accountservice.updateAccountByEmailId(emailId, updatedAccount);
+        if (updated) {
+            return ResponseEntity.ok("Account details updated successfully.");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 	
 }
 	

@@ -57,7 +57,20 @@ public class AccountServiceImpl implements AccountService {
 	
 	
 	
-	
+	public boolean updateAccountByEmailId(String emailId, Accounts updatedAccount) {
+        Accounts existingAccount = accountdao.findById(emailId).orElse(null);
+        if (existingAccount == null) {
+            return false; // Account not found
+        }
+        existingAccount.setFirst_name(updatedAccount.getFirst_name());
+        existingAccount.setLast_name(updatedAccount.getLast_name());
+        existingAccount.setAddress(updatedAccount.getAddress());
+        existingAccount.setContact(updatedAccount.getContact());
+        existingAccount.setRole(updatedAccount.getRole());
+
+        accountdao.save(existingAccount);
+        return true;
+    }
 	
 	
 	

@@ -4,8 +4,16 @@ import axios from 'axios';
 import './PostProperty.css'; // Import your CSS file for styling
 
 const PostProperty = () => {
+
+  const [loggedIn, setLoggedIn] = useState(
+    sessionStorage.getItem("loggedIn") === "true"
+  );
+  const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
+
+  console.log(userId);
   const navigate=useNavigate();
   const [propertyDetails, setPropertyDetails] = useState({
+    email_id:userId,
     property_name: '',
     property_type: '',
     bhk_type: '',

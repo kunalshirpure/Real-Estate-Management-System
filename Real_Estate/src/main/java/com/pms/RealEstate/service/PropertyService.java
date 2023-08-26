@@ -8,8 +8,6 @@ import com.pms.RealEstate.model.Property;
 
 public interface PropertyService {
 
-	
-
 	Property getpropertybyId(int id);
 
 	void deletepropertybyId(int id);
@@ -19,15 +17,17 @@ public interface PropertyService {
 	List<Property> getPropertiesByCityStateAndType(String city, String state, String propertyType);
 
 	List<Property> getAllProperties();
-	
-	
-	
-     void addProperty1(PropertyDto propertyDTO);	
-	 Property createPropertyFromDTO(PropertyDto propertyDTO);
-	 Buying createBuyingFromDTO(PropertyDto propertyDTO);
- 
-	 void updatePropertyDetails(PropertyDto propertyDto);
-	 void updateCommonPropertyDetails(Property property, PropertyDto propertyDto);
-	 void updateBuyingPropertyDetails(Property property, PropertyDto propertyDto);
-	
+
+	void addProperty1(PropertyDto propertyDTO);
+
+	Property createPropertyFromDTO(PropertyDto propertyDTO);
+
+	Buying createBuyingFromDTO(PropertyDto propertyDTO);
+
+	void updatePropertyDetails(PropertyDto propertyDto);
+
+	void updateCommonPropertyDetails(Property property, PropertyDto propertyDto);
+
+	void updateBuyingPropertyDetails(Property property, PropertyDto propertyDto);
+
 }
