@@ -46,7 +46,9 @@ const OwnerDashboard = ({ loggedIn, userId }) => {
     
   };
 
- 
+ const handleUpdateProperty = async (propertyId)=>{
+     navigate(`/propertyupdate/${propertyId}`)
+ }
 
   // const handleUpdateProperty = (propertyId) => {
   //   try {
@@ -72,11 +74,13 @@ const OwnerDashboard = ({ loggedIn, userId }) => {
             <li key={property.property_id}>
               <p> {property.property_name}</p>
               <p>{property.location}</p>
+              
+              <div className="property-buttons">
               <button onClick={() => handleDeleteProperty(property.property_id)}>
                 Delete
               </button>
-              <div className="property-buttons">
               <button onClick={() => handlePropertyClick(property.property_id)}>View Details</button>
+              <button onClick={()=> handleUpdateProperty(property.property_id)}> Update Property</button>
             </div>
             </li>
           ))}

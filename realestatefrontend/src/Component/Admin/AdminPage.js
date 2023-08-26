@@ -35,6 +35,12 @@ const AdminPage = () => {
   const handleDeleteProperty = (propertyId) => {
     // Implement property deletion logic
     console.log('Delete property:', propertyId);
+    try {
+      axios.delete(`http://localhost:8585/deleteproperty/${propertyId}`); // Replace with your DELETE API endpoint
+      properties(); // Fetch updated properties after deletion
+    } catch (error) {
+      console.error("Error deleting property:", error);
+    }
   };
 
   const handleDeleteUser = (userId) => {
@@ -49,8 +55,17 @@ const AdminPage = () => {
         <h3>Property Management</h3>
         <ul>
           {properties.map((property) => (
-            <li key={property.id}>
-              {property.title} - {property.location}
+            <li key={property.propertyId}>
+              <p>{property.property_name}</p>
+              <p>{property.bhk_type}</p>
+              <p>{property.city}</p>
+              <p>{property.state}</p>
+              <p>{property.description}</p>
+              <p>{property.furnihing_type}</p>
+              <p>{property.locality}</p>
+              <p>{property.listing_date}</p>
+              <p>{property.property_type}</p>
+
               <button onClick={() => handleDeleteProperty(property.id)}>Delete</button>
             </li>
           ))}
@@ -60,8 +75,12 @@ const AdminPage = () => {
         <h3>User Management</h3>
         <ul>
           {users.map((user) => (
-            <li key={user.id}>
-              {user.name} ({user.email})
+            <li key={user.email_id}>
+              <p>{user.first_name}</p>
+              <p>{user.last_name}</p>
+              <p>{user.email_id}</p>
+              <p>{user.contact}</p>
+              <p>{user.address}</p>
               <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
             </li>
           ))}

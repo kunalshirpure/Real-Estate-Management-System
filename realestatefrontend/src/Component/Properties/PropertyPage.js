@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link,useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "./PropertyPage.css";
 
@@ -42,10 +42,7 @@ const PropertyPage = () => {
               Property Type: {property.property_type}<br />
               Furnishing:  {property.furnishing_type}<br />
               Builtup Area: {property.buildup_area}<br />
-              {/* Expected Rent: {property.rental.expected_rent}<br /> */}
-              {/* Expected Deposit: {property.rental.expected_deposit}<br /> */}
-              {/* Preferred Tenants: {property.rental.preferred_tenants} */}
-          
+  
             <p className="listing-date">Available from: {property.listing_date}</p></p>
             <div className="property-buttons">
               <button onClick={() => handlePropertyClick(property.property_id)}>View Details</button>

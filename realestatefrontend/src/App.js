@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect,useState } from "react";
 import Header from "./Component/Header/Header";
 import Footer from "./Component/Footer/Footer";
 import Home from "./Component/Home/Home";
@@ -11,13 +11,14 @@ import PostProperty from "./Component/Properties/PostProperty";
 import AdminPage from "./Component/Admin/AdminPage";
 import OwnerDashboard from "./Component/Dashboard/OwnerDashboard";
 import PropertyServicePage from "./Component/Properties/PropertyServicePage";
+import PropertyUpdate from "./Component/Properties/PropertyUpdate";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
     sessionStorage.getItem("loggedIn") === "true"
   );
   const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
-
+ 
   const handleLogin = (loggedIn, userId) => {
     setLoggedIn(loggedIn);
     setUserId(userId);
@@ -43,6 +44,7 @@ function App() {
             path="/property/:propertyId"
             element={<PropertyServicePage />}
           />
+           <Route path="/propertyupdate/:propertyId" element={<PropertyUpdate/>} />
           {/* Add more routes for other pages */}
         </Routes>
         <Footer></Footer>
