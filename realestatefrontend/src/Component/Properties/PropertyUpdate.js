@@ -8,6 +8,9 @@ const UpdateProperty = () => {
   const navigate = useNavigate();
   console.log(propertyId);
 
+  const userId = sessionStorage.getItem("userId");
+  console.log(userId);
+
   const [propertyDetails, setPropertyDetails] = useState({
     // Initialize with empty values or null, assuming it's consistent with your API response
     property_name: "",

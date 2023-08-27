@@ -20,7 +20,7 @@ const PropertyServicePage = () => {
       setPropertyDetails(propertyResponse.data);
 
       // Fetch owner details using ownerId from property details
-      const ownerResponse = await axios.get(`/api/owners/${propertyResponse.data.ownerId}`);
+      const ownerResponse = await axios.get(``);
       setOwnerDetails(ownerResponse.data);
     } catch (error) {
       console.error('Error fetching property details:', error);

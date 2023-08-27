@@ -30,7 +30,7 @@
     margin: 10px 0;
   }
   
-  button {
+ .property-button {
     background-color: #ff0000;
     color: #fff;
     border: none;

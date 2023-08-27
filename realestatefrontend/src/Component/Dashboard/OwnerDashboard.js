@@ -5,11 +5,13 @@ import "./OwnerDashboard.css"; // Import your CSS file
 
 const OwnerDashboard = () => {
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(
-    sessionStorage.getItem("loggedIn") === "true"
-  );
-  const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
-  
+  // const [loggedIn, setLoggedIn] = useState(
+  //   sessionStorage.getItem("loggedIn") === "true"
+  // );
+ 
+  // const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
+  const loggedIn = sessionStorage.getItem("loggedIn")
+  const userId = sessionStorage.getItem("userId")
   console.log(userId)
   console.log(loggedIn)
   

@@ -5,10 +5,11 @@ import './PostProperty.css'; // Import your CSS file for styling
 
 const PostProperty = () => {
 
-  const [loggedIn, setLoggedIn] = useState(
-    sessionStorage.getItem("loggedIn") === "true"
-  );
-  const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
+  // const [loggedIn, setLoggedIn] = useState(
+  //   sessionStorage.getItem("loggedIn") === "true"
+  // );
+  // const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
+  const userId = sessionStorage.getItem("userId");
 
   console.log(userId);
   const navigate=useNavigate();
@@ -49,7 +50,7 @@ const PostProperty = () => {
       const response = await axios.post('http://localhost:8585/api/properties',
 
         {
-
+          "email_id":propertyDetails.email_id,
           "property_name": propertyDetails.property_name,
           "property_type": propertyDetails.property_type,
           "bhk_type": propertyDetails.bhk_type,
@@ -75,6 +76,8 @@ const PostProperty = () => {
         console.log('Property added successfully:', response.data);
         // Reset form after successful submission
         setPropertyDetails({
+          
+          email_id: '',
           property_name: '',
           property_type: '',
           bhk_type: '',

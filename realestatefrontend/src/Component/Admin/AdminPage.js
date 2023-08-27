@@ -32,7 +32,7 @@ const AdminPage = () => {
     
   }, []);
 
-  const handleDeleteProperty = (propertyId) => {
+   const handleDeleteProperty = (propertyId) => {
     // Implement property deletion logic
     console.log('Delete property:', propertyId);
     try {
@@ -54,6 +54,8 @@ const AdminPage = () => {
     }
   };
 
+
+
   return (
     <div className="admin-page">
       <h2>Admin Panel</h2>
@@ -61,7 +63,8 @@ const AdminPage = () => {
         <h3>Property Management</h3>
         <ul>
           {properties.map((property) => (
-            <li key={property.propertyId}>
+            <li key={property.property_Id}>
+              <div>
               <p>{property.property_name}</p>
               <p>{property.bhk_type}</p>
               <p>{property.city}</p>
@@ -71,8 +74,10 @@ const AdminPage = () => {
               <p>{property.locality}</p>
               <p>{property.listing_date}</p>
               <p>{property.property_type}</p>
-
-              <button onClick={() => handleDeleteProperty(property.id)}>Delete</button>
+              </div>
+              <div className="property-button">
+              <button onClick={() => handleDeleteProperty(property.property_id)}>Delete</button>
+              </div>
             </li>
           ))}
         </ul>
@@ -87,7 +92,9 @@ const AdminPage = () => {
               <p>{user.email_id}</p>
               <p>{user.contact}</p>
               <p>{user.address}</p>
-              <button onClick={() => handleDeleteUser(user.id)}>Delete</button>
+              <div className="property-button">
+              <button onClick={() => handleDeleteUser(user.email_id)}>Delete</button>
+              </div>
             </li>
           ))}
         </ul>
