@@ -87,11 +87,13 @@ const AdminPage = () => {
         <ul>
           {users.map((user) => (
             <li key={user.email_id}>
+              <div>
               <p>{user.first_name}</p>
               <p>{user.last_name}</p>
               <p>{user.email_id}</p>
               <p>{user.contact}</p>
               <p>{user.address}</p>
+              </div>
               <div className="property-button">
               <button onClick={() => handleDeleteUser(user.email_id)}>Delete</button>
               </div>
