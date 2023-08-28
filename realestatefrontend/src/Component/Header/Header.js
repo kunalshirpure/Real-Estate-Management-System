@@ -26,10 +26,10 @@ const Header = ({ loggedIn, userId }) => {
           {loggedIn ? (
             <>
               <li>
-                <span>{userId}</span>
+                <div>{userId}</div>
               </li>
               <li>
-                <span onClick={handleLogout}>Logout</span>
+                <div onClick={handleLogout} >LogOut</div>
               </li>
             </>
           ) : (

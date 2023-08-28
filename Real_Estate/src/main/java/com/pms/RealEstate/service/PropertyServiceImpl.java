@@ -1,10 +1,12 @@
 package com.pms.RealEstate.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.pms.RealEstate.dao.BuyingDao;
 import com.pms.RealEstate.dao.PropertyDao;
 import com.pms.RealEstate.dao.RentalDao;
@@ -58,7 +60,8 @@ public class PropertyServiceImpl implements PropertyService {
 
 	public Property createPropertyFromDTO(PropertyDto propertyDTO) {
 		Property property = new Property();
-
+		System.out.println(property);
+		property.setEmail_id(propertyDTO.getEmail_id());
 		property.setProperty_name(propertyDTO.getProperty_name());
 		property.setProperty_type(propertyDTO.getProperty_type());
 		property.setBhk_type(propertyDTO.getBhk_type());
@@ -177,5 +180,19 @@ public class PropertyServiceImpl implements PropertyService {
 	public List<Property> getPropertiesByCityStateAndType(String city, String state, String propertyType) {
 		return propertydao.findByLocality_CityAndLocality_StateAndPropertyType(city, state, propertyType);
 	}
+	
+	
+	 public Map<String, Object> getPropertyAndAccountsDetails(String email_id) {
+	       List<Map<String, Object>> result = propertydao.getPropertyAndAccountsDetails(email_id);
+
+	       if (result.isEmpty()) {
+	           return null;
+	       }
+
+	       // Assuming there's only one row in the result list
+	       return result.get(0);
+	   }
+
+     
 
 }

@@ -1,40 +1,41 @@
-import React, { useState } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import './PostProperty.css'; // Import your CSS file for styling
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import "./PostProperty.css"; // Import your CSS file for styling
 
 const PostProperty = () => {
+ 
+  const [loggedIn, setLoggedIn] = useState(
+    sessionStorage.getItem("loggedIn") === "true"
+  );
+  const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
+ console.log(userId);
+ 
+  const navigate = useNavigate();
 
-  // const [loggedIn, setLoggedIn] = useState(
-  //   sessionStorage.getItem("loggedIn") === "true"
-  // );
-  // const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
-  const userId = sessionStorage.getItem("userId");
+  
 
-  console.log(userId);
-  const navigate=useNavigate();
   const [propertyDetails, setPropertyDetails] = useState({
-    email_id:userId,
-    property_name: '',
-    property_type: '',
-    bhk_type: '',
+    email_id: "",
+    property_name: "",
+    property_type: "",
+    bhk_type: "",
     buildup_area: 0,
-    furnishing_type: '',
+    furnishing_type: "",
     floor: 0,
-    listing_date: '',
-    locality: '',
-    landmark_street: '',
-    city: '',
-    state: '',
+    listing_date: "",
+    locality: "",
+    landmark_street: "",
+    city: "",
+    state: "",
     pincode: 0,
-    description: '',
-    operation: '', // 'buy' or 'rent'
+    description: "",
+    operation: "", // 'buy' or 'rent'
     expected_rate: 0, // only for buying
     expected_rent: 0, // only for renting
     expected_deposit: 0, // only for renting
-    preferred_tenants: '' // only for renting
+    preferred_tenants: "", // only for renting
   });
-
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -47,66 +48,65 @@ const PostProperty = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8585/api/properties',
-
-        {
-          "email_id":propertyDetails.email_id,
-          "property_name": propertyDetails.property_name,
-          "property_type": propertyDetails.property_type,
-          "bhk_type": propertyDetails.bhk_type,
-          "buildup_area": parseFloat(propertyDetails.buildup_area),
-          "furnishing_type": propertyDetails.furnishing_type,
-          "floor": parseInt(propertyDetails.floor), // Parse as integer
-          "listing_date": propertyDetails.listing_date,
-          "locality": propertyDetails.locality,
-          "landmark_street": propertyDetails.landmark_street,
-          "city": propertyDetails.city,
-          "state": propertyDetails.state,
-          "pincode": parseInt(propertyDetails.pincode),
-          "description": propertyDetails.description,
-          "operation": propertyDetails.operation,
-          "expected_rate": parseFloat(propertyDetails.expected_rate),
-          "expected_rent": parseFloat(propertyDetails.expected_rent), // only for renting
-          "expected_deposit": parseFloat(propertyDetails.expected_deposit),// only for renting
-          "preferred_tenants": propertyDetails.preferred_tenants,
-
-        
-        });
+      const body= {
+        email_id: userId,
+        property_name: propertyDetails.property_name,
+        property_type: propertyDetails.property_type,
+        bhk_type: propertyDetails.bhk_type,
+        buildup_area: parseFloat(propertyDetails.buildup_area),
+        furnishing_type: propertyDetails.furnishing_type,
+        floor: parseInt(propertyDetails.floor), // Parse as integer
+        listing_date: propertyDetails.listing_date,
+        locality: propertyDetails.locality,
+        landmark_street: propertyDetails.landmark_street,
+        city: propertyDetails.city,
+        state: propertyDetails.state,
+        pincode: parseInt(propertyDetails.pincode),
+        description: propertyDetails.description,
+        operation: propertyDetails.operation,
+        expected_rate: parseFloat(propertyDetails.expected_rate),
+        expected_rent: parseFloat(propertyDetails.expected_rent), // only for renting
+        expected_deposit: parseFloat(propertyDetails.expected_deposit), // only for renting
+        preferred_tenants: propertyDetails.preferred_tenants,
+      };
+      console.log(body);
+      const response = await axios.post(
+        "http://localhost:8585/api/properties",body
+      );
       if (response.status === 200) {
-        console.log('Property added successfully:', response.data);
+        console.log("Property added successfully:", response.data);
         // Reset form after successful submission
         setPropertyDetails({
-          
-          email_id: '',
-          property_name: '',
-          property_type: '',
-          bhk_type: '',
+          email_id: "",
+          property_name: "",
+          property_type: "",
+          bhk_type: "",
           buildup_area: 0,
-          furnishing_type: '',
+          furnishing_type: "",
           floor: 0,
-          listing_date: '',
-          locality: '',
-          landmark_street: '',
-          city: '',
-          state: '',
+          listing_date: "",
+          locality: "",
+          landmark_street: "",
+          city: "",
+          state: "",
           pincode: 0,
-          description: '',
-          operation: '',
+          description: "",
+          operation: "",
           expected_rate: 0,
           expected_rent: 0,
           expected_deposit: 0,
-          preferred_tenants: '',
+          preferred_tenants: "",
         });
       }
     } catch (error) {
-      console.error('Error adding property:', error);
+      console.error("Error adding property:", error);
     }
-    navigate('/owner')
-  };
+    navigate("/owner");
+  }
 
   return (
     <div className="property-post">
-     <h1>Post Property</h1>
+      <h1>Post Property</h1>
       <form onSubmit={handleSubmit}>
         <label>Property Name:</label>
         <input
@@ -225,23 +225,20 @@ const PostProperty = () => {
           onChange={handleChange}
           required
         />
-        
-          <label>Operation:</label>
-          <select
-            name="operation"
-            value={propertyDetails.operation}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select Operation</option>
-            <option value="buy">Buy</option>
-            <option value="rent">Rent</option>
-          </select>
-       
 
+        <label>Operation:</label>
+        <select
+          name="operation"
+          value={propertyDetails.operation}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select Operation</option>
+          <option value="buy">Buy</option>
+          <option value="rent">Rent</option>
+        </select>
 
-
-        {propertyDetails.operation === 'buy' && (
+        {propertyDetails.operation === "buy" && (
           <>
             <label>Expected Rate:</label>
             <input
@@ -254,7 +251,7 @@ const PostProperty = () => {
           </>
         )}
 
-        {propertyDetails.operation === 'rent' && (
+        {propertyDetails.operation === "rent" && (
           <>
             <label>Expected Rent:</label>
             <input
@@ -279,15 +276,16 @@ const PostProperty = () => {
               value={propertyDetails.preferred_tenants}
               onChange={handleChange}
               required
-             ><option value="">Select Operation</option>
-             <option value="student">Student</option>
-             <option value="family">Family</option>
-           </select>
-             </>
-              )}
+            >
+              <option value="">Select Operation</option>
+              <option value="student">Student</option>
+              <option value="family">Family</option>
+            </select>
+          </>
+        )}
         <div>
-        <button type="submit"  >Post Property</button>
-        <Link to="/owner"/>
+          <button type="submit">Post Property</button>
+          <Link to="/owner" />
         </div>
       </form>
     </div>

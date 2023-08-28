@@ -41,11 +41,11 @@ const Home = () => {
             onChange={(e) => setLocation(e.target.value)}
           />
           
-          <select value={choice} onChange={(e) => setChoice(e.target.value)}>
+          {/* <select value={choice} onChange={(e) => setChoice(e.target.value)}>
             <option value="">Select choice</option>
             <option value="buy">Buy</option>
             <option value="rent">Rent</option>
-          </select>
+          </select> */}
           
           <button onClick={handleSearch}>Search</button>
         </div>

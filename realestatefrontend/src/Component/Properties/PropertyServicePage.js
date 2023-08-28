@@ -7,6 +7,7 @@ const PropertyServicePage = () => {
     const { propertyId } = useParams();
   const [propertyDetails, setPropertyDetails] = useState({});
   const [ownerDetails, setOwnerDetails] = useState({});
+
   console.log(propertyId)
 
   useEffect(() => {
@@ -18,9 +19,10 @@ const PropertyServicePage = () => {
       // Fetch property details using propertyId
       const propertyResponse = await axios.get(`http://localhost:8585/property/${propertyId}`);
       setPropertyDetails(propertyResponse.data);
-
+     
+     
       // Fetch owner details using ownerId from property details
-      const ownerResponse = await axios.get(``);
+      const ownerResponse = await axios.get(`http://localhost:8585/property-details/${propertyResponse.data.email_id}`);
       setOwnerDetails(ownerResponse.data);
     } catch (error) {
       console.error('Error fetching property details:', error);
@@ -45,8 +47,10 @@ const PropertyServicePage = () => {
       </div>
       <div className="owner-details">
         <h3>Owner Info</h3>
-        <p>Name: {ownerDetails.name}</p>
-        <p>Email: {ownerDetails.email}</p>
+        <p>Name: {ownerDetails.first_name}</p>
+        <p>Email: {ownerDetails.email_id}</p>
+        <p>Address: {ownerDetails.address}</p>
+        <p>Contact: {ownerDetails.contact}</p>
         {/* Add more owner details */}
       </div>
     </div>

@@ -1,6 +1,7 @@
 package com.pms.RealEstate.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.pms.RealEstate.dto.PropertyDto;
 import com.pms.RealEstate.model.Buying;
 import com.pms.RealEstate.model.Property;
@@ -53,7 +55,8 @@ public class PropertyController {
 	// property insert api
 	@PostMapping("api/properties")
 	public ResponseEntity<String> addProperty(@RequestBody PropertyDto propertyDTO) {
-		try {
+		try {System.out.println("inside conroler");
+			System.out.println(propertyDTO);
 			propertyservice.addProperty1(propertyDTO);
 			return ResponseEntity.ok("Property added successfully.");
 		} catch (Exception e) {
@@ -98,5 +101,45 @@ public class PropertyController {
 	public List<Buying> getBuyingProperties() {
 		return buyingservice.getAllBuyingProperties();
 	}
+	
+	
+	
+	
+	
+	
+	
+	@GetMapping("/property-details/{email_id}")
+	public ResponseEntity<Map<String, Object>> getPropertyAndAccountsDetails(@PathVariable String email_id) {
+		System.out.println(email_id);
+	   Map<String, Object> details = propertyservice.getPropertyAndAccountsDetails(email_id);
+	   
+	   
+	   if (details == null) {
+	       return ResponseEntity.notFound().build();
+	   }
+
+	   return ResponseEntity.ok(details);
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

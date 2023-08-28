@@ -1,6 +1,7 @@
 package com.pms.RealEstate.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.pms.RealEstate.dto.PropertyDto;
 import com.pms.RealEstate.model.Buying;
@@ -29,5 +30,7 @@ public interface PropertyService {
 	void updateCommonPropertyDetails(Property property, PropertyDto propertyDto);
 
 	void updateBuyingPropertyDetails(Property property, PropertyDto propertyDto);
+
+	Map<String, Object> getPropertyAndAccountsDetails(String email_id);
 
 }

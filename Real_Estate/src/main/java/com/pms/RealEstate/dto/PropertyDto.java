@@ -1,5 +1,9 @@
 package com.pms.RealEstate.dto;
 
+import java.util.Arrays;
+
+import com.pms.RealEstate.model.Accounts;
+
 public class PropertyDto {
 
 	private int property_id;
@@ -22,7 +26,8 @@ public class PropertyDto {
 	private double expected_deposit; // only for renting
 	private String preferred_tenants; // only for renting
 	private byte[] image_1;
-
+    private String email_id;
+    
 	public PropertyDto() {
 		super();
 	}
@@ -31,8 +36,9 @@ public class PropertyDto {
 			double buildup_area, String furnishing_type, int floor, String listing_date, String locality,
 			String landmark_street, String city, String state, int pincode, String description, String operation,
 			double expected_rate, double expected_rent, double expected_deposit, String preferred_tenants,
-			byte[] image_1) {
+			byte[] image_1, String email_id) {
 		super();
+		this.property_id = property_id;
 		this.property_name = property_name;
 		this.property_type = property_type;
 		this.bhk_type = bhk_type;
@@ -51,10 +57,16 @@ public class PropertyDto {
 		this.expected_rent = expected_rent;
 		this.expected_deposit = expected_deposit;
 		this.preferred_tenants = preferred_tenants;
-
 		this.image_1 = image_1;
+		this.email_id = email_id;
+	}
 
-		// Getters and setters
+	public int getProperty_id() {
+		return property_id;
+	}
+
+	public void setProperty_id(int property_id) {
+		this.property_id = property_id;
 	}
 
 	public String getProperty_name() {
@@ -209,23 +221,25 @@ public class PropertyDto {
 		this.image_1 = image_1;
 	}
 
+	public String getEmail_id() {
+		return email_id;
+	}
+
+	public void setEmail_id(String email_id) {
+		this.email_id = email_id;
+	}
+
 	@Override
 	public String toString() {
-		return "PropertyDto [property_name=" + property_name + ", property_type=" + property_type + ", bhk_type="
-				+ bhk_type + ", buildup_area=" + buildup_area + ", furnishing_type=" + furnishing_type + ", floor="
-				+ floor + ", listing_date=" + listing_date + ", locality=" + locality + ", landmark_street="
-				+ landmark_street + ", city=" + city + ", state=" + state + ", pincode=" + pincode + ", description="
-				+ description + ", operation=" + operation + ", expected_rate=" + expected_rate + ", expected_rent="
-				+ expected_rent + ", expected_deposit=" + expected_deposit + ", preferred_tenants=" + preferred_tenants
-				+ "]";
+		return "PropertyDto [property_id=" + property_id + ", property_name=" + property_name + ", property_type="
+				+ property_type + ", bhk_type=" + bhk_type + ", buildup_area=" + buildup_area + ", furnishing_type="
+				+ furnishing_type + ", floor=" + floor + ", listing_date=" + listing_date + ", locality=" + locality
+				+ ", landmark_street=" + landmark_street + ", city=" + city + ", state=" + state + ", pincode="
+				+ pincode + ", description=" + description + ", operation=" + operation + ", expected_rate="
+				+ expected_rate + ", expected_rent=" + expected_rent + ", expected_deposit=" + expected_deposit
+				+ ", preferred_tenants=" + preferred_tenants + ", image_1=" + Arrays.toString(image_1) + ", email_id="
+				+ email_id + "]";
 	}
-
-	public int getProperty_id() {
-		return property_id;
-	}
-
-	public void setProperty_id(int property_id) {
-		this.property_id = property_id;
-	}
-
+    
+    
 }

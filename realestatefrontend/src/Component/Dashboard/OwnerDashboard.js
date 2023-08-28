@@ -5,16 +5,10 @@ import "./OwnerDashboard.css"; // Import your CSS file
 
 const OwnerDashboard = () => {
   const navigate = useNavigate();
-  // const [loggedIn, setLoggedIn] = useState(
-  //   sessionStorage.getItem("loggedIn") === "true"
-  // );
- 
-  // const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
-  const loggedIn = sessionStorage.getItem("loggedIn")
-  const userId = sessionStorage.getItem("userId")
-  console.log(userId)
-  console.log(loggedIn)
-  
+  const [loggedIn, setLoggedIn] = useState(
+    sessionStorage.getItem("loggedIn") === "true"
+  );
+  const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
   const [ownedProperties, setOwnedProperties] = useState([]);
 
   useEffect(() => {
@@ -33,10 +27,10 @@ const OwnerDashboard = () => {
     navigate(`/property/${propertyId}`);
   };
 
-  const handleDeleteProperty =  (propertyId) => {
+  const handleDeleteProperty = (propertyId) => {
     // Implement property deletion logic
     try {
-       axios.delete(`http://localhost:8585/deleteproperty/${propertyId}`); // Replace with your DELETE API endpoint
+      axios.delete(`http://localhost:8585/deleteproperty/${propertyId}`); // Replace with your DELETE API endpoint
       ownedProperties(); // Fetch updated properties after deletion
     } catch (error) {
       console.error("Error deleting property:", error);
@@ -51,6 +45,10 @@ const OwnerDashboard = () => {
     navigate(`/propertyupdate/${propertyId}`);
   };
 
+  const handleUserId = async () => {
+  
+    navigate("/postproperty");
+  };
 
   return (
     <div className="owner-dashboard">
@@ -86,9 +84,9 @@ const OwnerDashboard = () => {
         </ul>
       </div>
       <div className="add-property-button">
-        <Link to="/postproperty">
-          <button>Add/Post Property</button>
-        </Link>
+        {/* <Link to="/postproperty"> */}
+          <button onClick={handleUserId}>Add/Post Property</button>
+        {/* </Link> */}
       </div>
     </div>
   );
