@@ -42,9 +42,9 @@ public class PropertyController {
 		return ResponseEntity.ok(properties);
 	}
 
-	@GetMapping("/property/{id}")
-	public ResponseEntity<Property> getById(@PathVariable int id) {
-		Property p = propertyservice.getpropertybyId(id);
+	@GetMapping("/property/{email_id}")
+	public ResponseEntity<Property> getById(@PathVariable String email_id) {
+		Property p = propertyservice.getpropertybyId(email_id);
 		if (p != null) {
 			return ResponseEntity.ok(p);
 		} else {

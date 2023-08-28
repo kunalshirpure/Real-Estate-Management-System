@@ -152,8 +152,8 @@ public class PropertyServiceImpl implements PropertyService {
 
 	// getproperty by id
 	@Override
-	public Property getpropertybyId(int id) {
-		Optional<Property> op = propertydao.findById(id);
+	public Property getpropertybyId(String email_id) {
+		Optional<Property> op = propertydao.findByEmail_Id(email_id);
 		if (op.isPresent()) {
 			return op.get();
 		} else {
