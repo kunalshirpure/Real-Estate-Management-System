@@ -14,7 +14,7 @@ const OwnerDashboard = () => {
   useEffect(() => {
     // Fetch properties from the Spring Boot API
     axios
-      .get("http://localhost:8585/properties") // Replace with your API URL
+      .get(`http://localhost:8585/propertydetails/${userId}`) // Replace with your API URL
       .then((response) => {
         setOwnedProperties(response.data);
       })

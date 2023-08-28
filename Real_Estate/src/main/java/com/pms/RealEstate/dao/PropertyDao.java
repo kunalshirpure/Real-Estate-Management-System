@@ -2,7 +2,6 @@ package com.pms.RealEstate.dao;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -32,7 +31,7 @@ public interface PropertyDao extends JpaRepository<Property, Integer> {
 	List<Map<String, Object>> getPropertyAndAccountsDetails(@Param("emailId") String emailId);
 
 	@Query(value="select * from property where email_id=?",nativeQuery=true)
-	Optional<Property> findByEmail_Id(String email_id);
+	List<Property> findByEmailId(String emailId);
 	
 	
 }

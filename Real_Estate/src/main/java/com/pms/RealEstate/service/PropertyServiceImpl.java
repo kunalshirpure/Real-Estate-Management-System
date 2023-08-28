@@ -152,8 +152,8 @@ public class PropertyServiceImpl implements PropertyService {
 
 	// getproperty by id
 	@Override
-	public Property getpropertybyId(String email_id) {
-		Optional<Property> op = propertydao.findByEmail_Id(email_id);
+	public Property getpropertybyId(int id) {
+		Optional<Property> op = propertydao.findById(id);
 		if (op.isPresent()) {
 			return op.get();
 		} else {
@@ -193,6 +193,9 @@ public class PropertyServiceImpl implements PropertyService {
 	       return result.get(0);
 	   }
 
-     
+	    public List<Property> getPropertyDetailsByEmailId(String emailId) {
+	        return propertydao.findByEmailId(emailId);
+	    }
+
 
 }

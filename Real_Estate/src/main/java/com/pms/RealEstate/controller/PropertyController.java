@@ -42,9 +42,9 @@ public class PropertyController {
 		return ResponseEntity.ok(properties);
 	}
 
-	@GetMapping("/property/{email_id}")
-	public ResponseEntity<Property> getById(@PathVariable String email_id) {
-		Property p = propertyservice.getpropertybyId(email_id);
+	@GetMapping("/property/{id}")
+	public ResponseEntity<Property> getById(@PathVariable int id) {
+		Property p = propertyservice.getpropertybyId(id);
 		if (p != null) {
 			return ResponseEntity.ok(p);
 		} else {
@@ -121,6 +121,17 @@ public class PropertyController {
 	   return ResponseEntity.ok(details);
 	}
 
+	
+	@GetMapping("/propertydetails/{emailId}")
+    public ResponseEntity<List<Property>> getPropertyDetailsByEmailId(@PathVariable String emailId) {
+        List<Property> propertyList = propertyservice.getPropertyDetailsByEmailId(emailId);
+        
+        if (propertyList.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(propertyList);
+    }
 	
 	
 	

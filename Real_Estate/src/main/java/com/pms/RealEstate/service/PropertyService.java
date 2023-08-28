@@ -9,7 +9,7 @@ import com.pms.RealEstate.model.Property;
 
 public interface PropertyService {
 
-	Property getpropertybyId(String email_id);
+	Property getpropertybyId(int id);
 
 	void deletepropertybyId(int id);
 
@@ -32,5 +32,7 @@ public interface PropertyService {
 	void updateBuyingPropertyDetails(Property property, PropertyDto propertyDto);
 
 	Map<String, Object> getPropertyAndAccountsDetails(String email_id);
+
+	List<Property> getPropertyDetailsByEmailId(String emailId);
 
 }
