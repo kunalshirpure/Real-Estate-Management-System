@@ -4,16 +4,13 @@ import axios from "axios";
 import "./PostProperty.css"; // Import your CSS file for styling
 
 const PostProperty = () => {
- 
   const [loggedIn, setLoggedIn] = useState(
     sessionStorage.getItem("loggedIn") === "true"
   );
   const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
- console.log(userId);
- 
-  const navigate = useNavigate();
+  console.log(userId);
 
-  
+  const navigate = useNavigate();
 
   const [propertyDetails, setPropertyDetails] = useState({
     email_id: "",
@@ -48,7 +45,7 @@ const PostProperty = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const body= {
+      const body = {
         email_id: userId,
         property_name: propertyDetails.property_name,
         property_type: propertyDetails.property_type,
@@ -71,7 +68,8 @@ const PostProperty = () => {
       };
       console.log(body);
       const response = await axios.post(
-        "http://localhost:8585/api/properties",body
+        "http://localhost:8585/api/properties",
+        body
       );
       if (response.status === 200) {
         console.log("Property added successfully:", response.data);
@@ -286,6 +284,9 @@ const PostProperty = () => {
         <div>
           <button type="submit">Post Property</button>
           <Link to="/owner" />
+        </div>
+        <div>
+          <Link to="/owner">OwnerDashboard</Link>
         </div>
       </form>
     </div>

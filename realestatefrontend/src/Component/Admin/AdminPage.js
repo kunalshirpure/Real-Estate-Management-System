@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './AdminPage.css'; // Import your CSS file
 
 const AdminPage = () => {
+  const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
   const [users, setUsers] = useState([]);
 
@@ -32,7 +34,7 @@ const AdminPage = () => {
     
   }, []);
 
-   const handleDeleteProperty = (propertyId) => {
+   /*const handleDeleteProperty = (propertyId) => {
     // Implement property deletion logic
     console.log('Delete property:', propertyId);
     try {
@@ -41,9 +43,20 @@ const AdminPage = () => {
     } catch (error) {
       console.error("Error deleting property:", error);
     }
+  };*/
+
+  const handleDeleteProperty = async (propertyId) => {
+    try {
+      await axios.delete(`http://localhost:8585/deleteproperty/${propertyId}`);
+      setProperties(prevProperties =>
+        prevProperties.filter(property => property.property_id !== propertyId)
+      );
+    } catch (error) {
+      console.error("Error deleting property:", error);
+    }
   };
 
-  const handleDeleteUser = (userId) => {
+/*  const handleDeleteUser = (userId) => {
    
     console.log('Delete user:', userId);
     try {
@@ -52,9 +65,23 @@ const AdminPage = () => {
     } catch (error) {
       console.error("Error deleting property:", error);
     }
+  }; */
+
+ 
+  const handleDeleteUser = async (userId) => {
+    try {
+      await axios.delete(`http://localhost:8585/delete/${userId}`);
+      setUsers(prevUsers =>
+        prevUsers.filter(user => user.email_id !== userId)
+      );
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    }
   };
 
-
+  const handleAccountUpdate = async (userId)=>{
+   navigate(`/update/${userId}`)
+  }
 
   return (
     <div className="admin-page">
@@ -62,43 +89,52 @@ const AdminPage = () => {
       <div className="property-management">
         <h3>Property Management</h3>
         <ul>
+          <div className="property-grid">
           {properties.map((property) => (
             <li key={property.property_Id}>
-              <div>
-              <p>{property.property_name}</p>
-              <p>{property.bhk_type}</p>
-              <p>{property.city}</p>
-              <p>{property.state}</p>
-              <p>{property.description}</p>
-              <p>{property.furnihing_type}</p>
-              <p>{property.locality}</p>
-              <p>{property.listing_date}</p>
-              <p>{property.property_type}</p>
-              </div>
+              <div className="property-card">
+              <p>Title : {property.property_name}</p>
+              <p>BHK : {property.bhk_type}</p>
+              <p>City : {property.city}</p>
+              <p>State : {property.state}</p>
+              <p>Discription :{property.description}</p>
+              <p>Furnishing : {property.furnihing_type}</p>
+              <p>Locality : {property.locality}</p>
+              <p>Listing Date : {property.listing_date}</p>
+              <p>Property Type : {property.property_type}</p>
               <div className="property-button">
               <button onClick={() => handleDeleteProperty(property.property_id)}>Delete</button>
               </div>
+              </div>
+              
             </li>
           ))}
+          </div>
         </ul>
       </div>
       <div className="user-management">
         <h3>User Management</h3>
         <ul>
+          <div className="property-grid">
           {users.map((user) => (
             <li key={user.email_id}>
-              <div>
-              <p>{user.first_name}</p>
-              <p>{user.last_name}</p>
-              <p>{user.email_id}</p>
-              <p>{user.contact}</p>
-              <p>{user.address}</p>
-              </div>
+              <div className="property-card">
+              <p>First Name : {user.first_name}</p>
+              <p>Last Name {user.last_name}</p>
+              <p>Email : {user.email_id}</p>
+              <p>Contact : {user.contact}</p>
+              <p>Address : {user.address}</p>
+              
               <div className="property-button">
               <button onClick={() => handleDeleteUser(user.email_id)}>Delete</button>
               </div>
+              <div className="property-button">
+              <button onClick={() => handleAccountUpdate(user.email_id)}>Update</button>
+              </div>
+              </div>
             </li>
           ))}
+          </div>
         </ul>
       </div>
     </div>

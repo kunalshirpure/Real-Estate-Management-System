@@ -12,16 +12,25 @@ import AdminPage from "./Component/Admin/AdminPage";
 import OwnerDashboard from "./Component/Dashboard/OwnerDashboard";
 import PropertyServicePage from "./Component/Properties/PropertyServicePage";
 import PropertyUpdate from "./Component/Properties/PropertyUpdate";
+import ForgotPassword from "./Component/Service/ForgotPassword";
+import UpdateAccount from "./Component/Service/UpdateAccount";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(
     sessionStorage.getItem("loggedIn") === "true"
   );
   const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
- 
+
+  // const handleLogin = (loggedIn, userId) => {
+  //   setLoggedIn(loggedIn);
+  //   setUserId(userId);
+  // };
+
   const handleLogin = (loggedIn, userId) => {
     setLoggedIn(loggedIn);
     setUserId(userId);
+    sessionStorage.setItem("loggedIn", loggedIn ? "true" : "false");
+    sessionStorage.setItem("userId", userId);
   };
 
   return (
@@ -44,7 +53,18 @@ function App() {
             path="/property/:propertyId"
             element={<PropertyServicePage />}
           />
-           <Route path="/propertyupdate/:propertyId" element={<PropertyUpdate/>} />
+          <Route
+            path="/propertyupdate/:propertyId"
+            element={<PropertyUpdate />}
+          />
+          <Route
+            path="/update/:userId"
+            element={<UpdateAccount />}
+          />
+          <Route
+            path="/forgot-password"
+            element={<ForgotPassword />}
+          />
           {/* Add more routes for other pages */}
         </Routes>
         <Footer></Footer>

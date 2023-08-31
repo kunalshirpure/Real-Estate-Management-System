@@ -2,8 +2,11 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.css"; // Import your CSS file for styling
 
-const Header = ({ loggedIn, userId }) => {
+const Header = () => {
   const navigate = useNavigate();
+  const loggedIn = sessionStorage.getItem("loggedIn") === "true";
+  const userId = sessionStorage.getItem("userId");
+  const userRole = sessionStorage.getItem("userRole"); // Get user's role
 
   const handleLogout = () => {
     // Clear sessionStorage and navigate to the home page
@@ -19,17 +22,32 @@ const Header = ({ loggedIn, userId }) => {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to="/postproperty">Post Properties</Link>
-          </li>
+          {/* {userRole === "owner" && ( // Render only for owners
+            <li>
+              <Link to="/postproperty">Post Properties</Link>
+            </li>
+          )} */}
+
+          {loggedIn ? (
+            <li>
+              <Link to="/postproperty">Post Properties</Link>
+            </li>
+          ) : (
+            <li>
+              {" "}
+              <Link to="/signin">Post Properties</Link>
+            </li>
+          )}
 
           {loggedIn ? (
             <>
               <li>
-                <div>{userId}</div>
+                <Link className="log">{userId}</Link>
               </li>
               <li>
-                <div onClick={handleLogout} >LogOut</div>
+                <Link onClick={handleLogout} className="log" >
+                  LogOut
+                </Link>
               </li>
             </>
           ) : (

@@ -1,39 +1,25 @@
-/* Footer.css */
-/* 
+/* Styling for the footer, making it look like a header */
 .footer {
   background-color: #333;
   color: #fff;
-  padding: 20px;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  padding: 20px 0;
 }
- */
 
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
+.footer-logo {
+  font-size: 24px;
+  font-weight: bold;
+}
 
-
-.footer {
-    background-color: #333;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-  }
-  
-  .footer-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .footer-logo {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .footer-text {
-    margin-top: 10px;
-    font-size: 14px;
-  }
-  
+.footer-text {
+  font-size: 14px;
+  opacity: 0.7;
+}

@@ -1,9 +1,13 @@
 package com.pms.RealEstate.service;
 
 import java.util.List;
+import java.util.Optional;
+
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.pms.RealEstate.dao.AccountDao;
 import com.pms.RealEstate.dto.LoginDto;
 import com.pms.RealEstate.model.Accounts;
@@ -71,6 +75,31 @@ public class AccountServiceImpl implements AccountService {
         accountdao.save(existingAccount);
         return true;
     }
+
+
+	@Override
+	public void deleteaccount(String email_id) {
+
+		accountdao.deleteById(email_id);
+		
+	}
+
+
+	@Override
+	public Accounts getEmailId(String email_id) {
+		Optional<Accounts> op=accountdao.findById(email_id);
+		if(op.isPresent())
+		{
+			return op.get();
+		}
+		else
+		{
+			return null;
+		}
+				
+	
+	
+	}
 	
 	
 	

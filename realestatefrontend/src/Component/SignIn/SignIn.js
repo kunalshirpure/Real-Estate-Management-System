@@ -43,20 +43,26 @@ const SignIn = () => {
           if (response.data.role === "user") {
             // Navigate to the home page for consumers
             const userId = response.data.email_id;
+            const userRole=response.data.role;
             sessionStorage.setItem('loggedIn', 'true');
             sessionStorage.setItem('userId', userId);
+            sessionStorage.setItem('userRole', userRole); 
             navigate("/");
           } else if (response.data.role === "owner") {
             // Navigate to the owner dashboard
             const userId = response.data.email_id;
+            const userRole=response.data.role;
             sessionStorage.setItem('loggedIn', 'true');
             sessionStorage.setItem('userId', userId);
+            sessionStorage.setItem('userRole', userRole); 
             navigate("/owner");
           } else if (response.data.role === "admin") {
             // Navigate to the admin dashboard
             const userId = response.data.email_id;
+            const userRole=response.data.role;
             sessionStorage.setItem('loggedIn', 'true');
             sessionStorage.setItem('userId', userId);
+            sessionStorage.setItem('userRole', userRole); 
             navigate("/admin");
           }
       } else {
@@ -69,7 +75,7 @@ const SignIn = () => {
   };
 
   const handleForgotPassword = () => {
-    // Here you can implement the "Forgot Password" functionality
+    // navigate("/forgot-password")
     console.log('Forgot password clicked');
   };
 

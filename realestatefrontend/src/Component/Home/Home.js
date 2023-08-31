@@ -31,7 +31,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="home-content">
-        <h1>Welcome to RealEstate Management</h1>
+        <h1>Welcome to RealEstate</h1>
         <p>Your trusted partner for finding your dream property.</p>
         <div className="search-form">
           <input
@@ -41,11 +41,11 @@ const Home = () => {
             onChange={(e) => setLocation(e.target.value)}
           />
           
-          {/* <select value={choice} onChange={(e) => setChoice(e.target.value)}>
+          <select value={choice} onChange={(e) => setChoice(e.target.value)}>
             <option value="">Select choice</option>
             <option value="buy">Buy</option>
             <option value="rent">Rent</option>
-          </select> */}
+          </select>
           
           <button onClick={handleSearch}>Search</button>
         </div>

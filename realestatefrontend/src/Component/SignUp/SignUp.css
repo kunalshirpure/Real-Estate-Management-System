@@ -3,80 +3,88 @@
 .sign-up {
   max-width: 400px;
   margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
+  display: grid;
+  gap: 20px;
 }
 
 .sign-up h1 {
   text-align: center;
+  font-size: 28px;
+  color: #333;
   margin-bottom: 20px;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .form-group label {
   display: block;
   font-weight: bold;
-  margin-bottom: 5px;
+  color: #444;
+  margin-bottom: 8px;
 }
 
 .form-group input,
 .form-group select {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #555;
+  transition: border-color 0.3s;
 }
 
 .form-group select {
   appearance: none;
+  background-color: #f0f0f0;
+}
+
+.form-group input:focus {
+  border-color: #007bff;
 }
 
 .form-group button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s;
 }
 
 .form-group button:hover {
   background-color: #0056b3;
 }
 
-.toastify-container {
-  z-index: 9999;
+.signup-button {
+  width: 100%;
+  padding: 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.toastify-content {
-  font-size: 14px;
-  padding: 10px 15px;
-  border-radius: 4px;
+.signup-button:hover {
+  background-color: #0056b3;
 }
 
 /* Media Query for Small Screens */
 @media (max-width: 480px) {
   .sign-up {
     max-width: 100%;
+    padding: 20px;
   }
-}
-.signup-button {
-  width: 100%;
-  padding: 20px;
-  background-color: blue;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background-color 0.3s ease-in-out;
 }

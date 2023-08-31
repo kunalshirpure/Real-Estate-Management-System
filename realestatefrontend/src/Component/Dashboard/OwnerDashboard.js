@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import Link from react-router-dom
+import { useNavigate } from "react-router-dom"; // Import Link from react-router-dom
 import axios from "axios";
 import "./OwnerDashboard.css"; // Import your CSS file
 
@@ -27,18 +27,35 @@ const OwnerDashboard = () => {
     navigate(`/property/${propertyId}`);
   };
 
-  const handleDeleteProperty = (propertyId) => {
-    // Implement property deletion logic
+  // const handleDeleteProperty = (propertyId) => {
+  //   // Implement property deletion logic
+  //   try {
+  //     axios.delete(`http://localhost:8585/deleteproperty/${propertyId}`); // Replace with your DELETE API endpoint
+  //     ownedProperties(); // Fetch updated properties after deletion
+  //   } catch (error) {
+  //     console.error("Error deleting property:", error);
+  //   }
+  //   const updatedProperties = ownedProperties.filter(
+  //     (property) => property.id !== propertyId
+  //   );
+  //   setOwnedProperties(updatedProperties);
+  // }; 
+
+  const handleDeleteProperty = async (propertyId) => {
     try {
-      axios.delete(`http://localhost:8585/deleteproperty/${propertyId}`); // Replace with your DELETE API endpoint
-      ownedProperties(); // Fetch updated properties after deletion
+      // Optimistic UI update
+      const updatedProperties = ownedProperties.filter(
+        (property) => property.property_id !== propertyId
+      );
+      setOwnedProperties(updatedProperties);
+
+      // Delete property on the server
+      await axios.delete(`http://localhost:8585/deleteproperty/${propertyId}`);
     } catch (error) {
       console.error("Error deleting property:", error);
+      // Revert the UI update on error
+      setOwnedProperties(ownedProperties);
     }
-    const updatedProperties = ownedProperties.filter(
-      (property) => property.id !== propertyId
-    );
-    setOwnedProperties(updatedProperties);
   };
 
   const handleUpdateProperty = async (propertyId) => {
@@ -46,7 +63,6 @@ const OwnerDashboard = () => {
   };
 
   const handleUserId = async () => {
-  
     navigate("/postproperty");
   };
 
@@ -84,9 +100,7 @@ const OwnerDashboard = () => {
         </ul>
       </div>
       <div className="add-property-button">
-        {/* <Link to="/postproperty"> */}
-          <button onClick={handleUserId}>Add/Post Property</button>
-        {/* </Link> */}
+        <button onClick={handleUserId}>Add/Post Property</button>
       </div>
     </div>
   );
