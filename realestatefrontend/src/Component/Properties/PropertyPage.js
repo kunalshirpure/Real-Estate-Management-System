@@ -36,10 +36,16 @@ const PropertyPage = () => {
       .catch((error) => {
         console.error("Error fetching properties:", error);
       });
-  }, [searchLocation]);
+  }, [searchLocation,searchChoice]);
 
   const handlePropertyClick = (propertyId) => {
-    navigate(`/property/${propertyId}`);
+    if(loggedIn){
+      navigate(`/property/${propertyId}`);
+    }
+    else{
+      navigate("/signin")
+    }
+   
   };
 
   return (

@@ -79,13 +79,15 @@ const UpdateProperty = () => {
     <div className="property-update">
       <h1>Update Property</h1>
       <form onSubmit={handleSubmit}>
-        <label>Property Name:</label>
+      <label>Property Name:</label>
         <input
           type="text"
           name="property_name"
           value={propertyDetails.property_name}
           onChange={handleChange}
           required
+          minLength="1"
+          maxLength="200"
         />
 
         <label>Property Type:</label>
@@ -95,6 +97,8 @@ const UpdateProperty = () => {
           value={propertyDetails.property_type}
           onChange={handleChange}
           required
+          minLength="1"
+          maxLength="200"
         />
 
         <label>BHK Type:</label>
@@ -106,18 +110,23 @@ const UpdateProperty = () => {
           className="input-field"
         >
           <option value="">Select Bhk Type</option>
+          <option value="1rk">1 RK</option>
           <option value="1bhk">1 Bhk</option>
           <option value="2bhk">2 Bhk</option>
           <option value="3bhk">3 Bhk</option>
+          <option value="4bhk">4 Bhk</option>
           {/* Add more options as needed */}
         </select>
-        <label>Buildup Area:</label>
+
+        <label>Buildup Area: (SqFt)</label>
         <input
           type="number"
           name="buildup_area"
           value={propertyDetails.buildup_area}
           onChange={handleChange}
           required
+          min="200"
+          max="10000"
         />
         <label>Furnishing Type:</label>
         <select
@@ -132,6 +141,7 @@ const UpdateProperty = () => {
           <option value="semi-furnished">Semi-Furnished</option>
           <option value="fully-furnished">Fully Furnished</option>
         </select>
+
         <label>Floor:</label>
         <input
           type="number"
@@ -139,15 +149,20 @@ const UpdateProperty = () => {
           value={propertyDetails.floor}
           onChange={handleChange}
           required
+          min="0"
+          max="100"
         />
-        <label>Listing Date:</label>
+
+        {/* <label>Listing Date:</label>
         <input
           type="date"
           name="listing_date"
           value={propertyDetails.listing_date}
           onChange={handleChange}
+          min={currentDate}
+          max={currentDate}
           required
-        />
+        /> */}
         <label>Locality:</label>
         <input
           type="text"
@@ -155,6 +170,8 @@ const UpdateProperty = () => {
           value={propertyDetails.locality}
           onChange={handleChange}
           required
+          minLength="1"
+          maxLength="200"
         />
         <label>Landmark/Street:</label>
         <input
@@ -163,6 +180,8 @@ const UpdateProperty = () => {
           value={propertyDetails.landmark_street}
           onChange={handleChange}
           required
+          minLength="1"
+          maxLength="200"
         />
         <label>City:</label>
         <input
@@ -171,6 +190,8 @@ const UpdateProperty = () => {
           value={propertyDetails.city}
           onChange={handleChange}
           required
+          minLength="1"
+          maxLength="200"
         />
         <label> State:</label>
         <input
@@ -179,15 +200,21 @@ const UpdateProperty = () => {
           value={propertyDetails.state}
           onChange={handleChange}
           required
+          minLength="1"
+          maxLength="200"
         />
+
         <label>Pincode:</label>
         <input
           type="number"
+          min="100000"
+          max="999999"
           name="pincode"
           value={propertyDetails.pincode}
           onChange={handleChange}
           required
         />
+
         <label>Description:</label>
         <input
           type="text"
@@ -195,6 +222,8 @@ const UpdateProperty = () => {
           value={propertyDetails.description}
           onChange={handleChange}
           required
+          minLength="1"
+          maxLength="200"
         />
 
         <label>Operation:</label>
@@ -205,8 +234,8 @@ const UpdateProperty = () => {
           required
         >
           <option value="">Select Operation</option>
-          <option value="buy">Buy</option>
-          <option value="rent">Rent</option>
+          <option value="buy">Sell</option>
+          <option value="rental">Rent</option>
         </select>
 
         {propertyDetails.operation === "buy" && (
@@ -218,11 +247,12 @@ const UpdateProperty = () => {
               value={propertyDetails.expected_rate}
               onChange={handleChange}
               required
+              min="1"
             />
           </>
         )}
 
-        {propertyDetails.operation === "rent" && (
+        {propertyDetails.operation === "rental" && (
           <>
             <label>Expected Rent:</label>
             <input
@@ -231,7 +261,9 @@ const UpdateProperty = () => {
               value={propertyDetails.expected_rent}
               onChange={handleChange}
               required
+              min="1"
             />
+
             <label>Expected Deposit:</label>
             <input
               type="number"
@@ -239,6 +271,7 @@ const UpdateProperty = () => {
               value={propertyDetails.expected_deposit}
               onChange={handleChange}
               required
+              min="1"
             />
 
             <label>Preferred Tenants:</label>
@@ -249,14 +282,12 @@ const UpdateProperty = () => {
               required
             >
               <option value="">Select Operation</option>
-              <option value="student">Student</option>
+              <option value="student">Students</option>
               <option value="family">Family</option>
+              <option value="anyone">Anyone</option>
             </select>
           </>
         )}
-
-        {/* Render form fields similar to PostProperty, using propertyDetails as values */}
-        {/* ... */}
         <div>
           <button type="submit">Update Property</button>
           <Link to="/owner">Back to Owner Page</Link>

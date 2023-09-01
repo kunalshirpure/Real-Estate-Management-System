@@ -40,6 +40,34 @@ const UpdateAccount = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !contact ||
+      !address ||
+      !role
+    ) {
+      window.alert("Please fill in all fields");
+      return;
+    }
+
+    if (
+      !/^[a-zA-Z0-9]+@(gmail\.com|yahoo\.com|outlook\.com|hotmail\.com)$/.test(
+        email
+      )
+    ) {
+      window.alert(
+        "Please enter a valid email address from a popular email provider (Gmail, Yahoo, Outlook, or Hotmail)"
+      );
+      return;
+    }
+
+    if (!/^\d{10}$/.test(contact)) {
+      window.alert("Please enter a valid contact number");
+      return;
+    }
+
     const updatedUser = {
       first_name: firstName,
       last_name: lastName,

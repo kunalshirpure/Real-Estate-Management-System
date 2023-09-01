@@ -21,7 +21,7 @@ const OwnerDashboard = () => {
       .catch((error) => {
         console.error("Error fetching properties:", error);
       });
-  }, []);
+  }, [userId]);
 
   const handlePropertyClick = (propertyId) => {
     navigate(`/property/${propertyId}`);

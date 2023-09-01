@@ -25,7 +25,12 @@ const Home = () => {
   };
 
   const handleSearch = () => {
-    navigate("/properties", { state: { location, choice } });
+    if(location === ""){
+      alert("Enter Into Search Your Desired Location")
+    }else{
+      navigate("/properties", { state: { location, choice } });
+    }
+    
   };
 
   return (
@@ -36,7 +41,7 @@ const Home = () => {
         <div className="search-form">
           <input
             type="text"
-            placeholder="Enter City"
+            placeholder="Enter City , Locality"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />

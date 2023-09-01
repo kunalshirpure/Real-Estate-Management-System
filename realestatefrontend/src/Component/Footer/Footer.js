@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Footer.css'; // Import your CSS file for styling
 
 const Footer = () => {
@@ -18,6 +19,9 @@ const Footer = () => {
         <div className="footer-logo">RealEstate</div>
         <p className="footer-text">
           © {new Date().getFullYear()} All rights reserved. Current Time: {currentTime.toLocaleTimeString()}
+        </p>
+        <p className="footer-link">
+          <Link to="/about">About Us</Link> {/* Link to the About Us page */}
         </p>
       </div>
     </footer>

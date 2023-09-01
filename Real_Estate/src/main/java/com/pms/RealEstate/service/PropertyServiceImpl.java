@@ -1,5 +1,6 @@
 package com.pms.RealEstate.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -161,6 +162,8 @@ public class PropertyServiceImpl implements PropertyService {
 			// throw new ResourceAccessException("not found");
 		}
 	}
+	
+	
 
 	// delete property by id
 	@Override
@@ -170,10 +173,25 @@ public class PropertyServiceImpl implements PropertyService {
 	}
 
 	// get property by city
+//	@Override
+//	public List<Property> getPropertiesByCity(String city) {
+//		return propertydao.findByCity(city);
+//	}
+	
 	@Override
 	public List<Property> getPropertiesByCity(String city) {
-		return propertydao.findByCity(city);
+	List<Property> mm=new ArrayList<>();
+	List<Property> all=propertydao.findAll();
+	for(Property P:all)
+	{
+	if(P.getCity().equals(city)|| P.getLocality().equals(city) || P.getLocality().equals(city))
+	    {
+	   mm.add(P);
+	                 }
 	}
+	return mm;
+	}
+	
 
 	// get property by city and type
 	@Override

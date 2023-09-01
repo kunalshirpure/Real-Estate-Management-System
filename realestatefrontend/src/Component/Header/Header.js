@@ -28,13 +28,15 @@ const Header = () => {
             </li>
           )} */}
 
-          {loggedIn ? (
+          {loggedIn && userRole==="owner" ? (
             <li>
               <Link to="/postproperty">Post Properties</Link>
             </li>
           ) : (
+            
             <li>
-              {" "}
+             
+              
               <Link to="/signin">Post Properties</Link>
             </li>
           )}
@@ -45,7 +47,7 @@ const Header = () => {
                 <Link className="log">{userId}</Link>
               </li>
               <li>
-                <Link onClick={handleLogout} className="log" >
+                <Link onClick={handleLogout} className="log"  to="/">
                   LogOut
                 </Link>
               </li>
