@@ -96,11 +96,19 @@ public class AccountServiceImpl implements AccountService {
 		{
 			return null;
 		}
-				
-	
-	
+			
 	}
 	
+	public void resetPassword(String email_id, String first_name, String password) {
+        Accounts account = accountdao.findAccountByEmailIdAndFirstName(email_id, first_name);
+        System.out.println(account);
+        if (account != null) {
+            account.setPassword(password);
+            accountdao.save(account);
+        } else {
+            // Handle the case where the user is not found
+            throw new RuntimeException("User not found");
+        }
 	
 	
 	

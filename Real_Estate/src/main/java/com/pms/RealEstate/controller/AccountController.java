@@ -3,6 +3,8 @@ package com.pms.RealEstate.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.pms.RealEstate.dto.ResetPasswordDto;
 
 import com.pms.RealEstate.dto.LoginDto;
+import com.pms.RealEstate.dto.ResetPasswordDto;
 import com.pms.RealEstate.model.Accounts;
 import com.pms.RealEstate.service.AccountService;
 
@@ -72,6 +76,23 @@ public class AccountController {
 	{
 		accountservice.deleteaccount(email_id);
 	}
+	
+	
+	@PostMapping("/reset-password")
+    public ResponseEntity<String> resetPassword(@RequestBody ResetPasswordDto resetPasswordDto) {
+        try {
+            String email_id = resetPasswordDto.getEmail_id();
+            String first_name = resetPasswordDto.getFirst_name();
+            String password = resetPasswordDto.getPassword();
+            System.out.println(resetPasswordDto);
+            accountservice.resetPassword(email_id,first_name, password);
+            
+            return ResponseEntity.ok("Password reset successful");
+        } catch (Exception e) {
+            // Handle exceptions
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password reset failed");
+        }
+    }
 }
 	
 	

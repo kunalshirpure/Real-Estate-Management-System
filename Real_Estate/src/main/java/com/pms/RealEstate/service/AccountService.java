@@ -20,4 +20,6 @@ public interface AccountService {
 	void deleteaccount(String email_id);
 
 	Accounts getEmailId(String to);
+
+	void resetPassword(String email_id, String first_name, String password);
 }

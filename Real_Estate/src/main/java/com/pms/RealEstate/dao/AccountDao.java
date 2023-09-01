@@ -16,5 +16,9 @@ public interface AccountDao extends JpaRepository<Accounts, String> {
 
 	@Query(value = "select * from accounts where email_id=?", nativeQuery = true)
 	Accounts updateUser(String email_id, String password);
+	
+	
+	@Query("SELECT a FROM Accounts a WHERE a.email_id = :email_id AND a.first_name = :first_name")
+    Accounts findAccountByEmailIdAndFirstName(@Param("email_id") String email_id, @Param("first_name") String first_name);
 
 }

@@ -3,6 +3,7 @@ import './SignIn.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
 const SignIn = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
@@ -90,6 +91,7 @@ const SignIn = () => {
           <label htmlFor="username">Username</label>
           <input
             type="text"
+            placeholder='Enter Email'
             id="username"
             value={username}
             onChange={handleUsernameChange}
@@ -99,6 +101,7 @@ const SignIn = () => {
           <label htmlFor="password">Password</label>
           <input
             type="password"
+            placeholder='Enter Password'
             id="password"
             value={password}
             onChange={handlePasswordChange}
