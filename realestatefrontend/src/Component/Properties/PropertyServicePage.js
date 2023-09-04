@@ -46,11 +46,12 @@ const PropertyServicePage = () => {
         <p>State: {propertyDetails.state}</p>
         <p>Pincode : {propertyDetails.pincode}</p>
         <p>Description: {propertyDetails.description}</p>
+      
         {/* Add more property details */}
       </div>
       <div className="owner-details">
         <h3>Owner Info</h3>
-        <p>Name: {ownerDetails.first_name}</p>
+        <p>Name: {ownerDetails.first_name} {"  "} {ownerDetails.last_name}</p> 
         <p>Email: {ownerDetails.email_id}</p>
         <p>Address: {ownerDetails.address}</p>
         <p>Contact: {ownerDetails.contact}</p>
@@ -61,4 +62,3 @@ const PropertyServicePage = () => {
 };
 
 export default PropertyServicePage;
-

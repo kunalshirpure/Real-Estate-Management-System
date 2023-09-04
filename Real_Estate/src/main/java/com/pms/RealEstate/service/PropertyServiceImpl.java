@@ -42,7 +42,7 @@ public class PropertyServiceImpl implements PropertyService {
 			Buying buying = createBuyingFromDTO(propertyDTO);
 			property.setBuying(buying);
 			buying.setProperty(property);
-		} else if ("rent".equals(propertyDTO.getOperation())) {
+		} else if ("rental".equals(propertyDTO.getOperation())) {
 			Rental rental = createRentalFromDTO(propertyDTO);
 			property.setRental(rental);
 			rental.setProperty(property);
@@ -93,7 +93,7 @@ public class PropertyServiceImpl implements PropertyService {
 
 			if ("buy".equals(propertyDto.getOperation())) {
 				updateBuyingPropertyDetails(existingProperty, propertyDto);
-			} else if ("rent".equals(propertyDto.getOperation())) {
+			} else if ("rental".equals(propertyDto.getOperation())) {
 				updateRentalPropertyDetails(existingProperty, propertyDto);
 			}
 

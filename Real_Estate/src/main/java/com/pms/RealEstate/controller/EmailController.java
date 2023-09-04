@@ -31,16 +31,12 @@ AccountService accountservice;
     System.out.println(emailRequest);
     Accounts a = accountservice.getEmailId(emailRequest.getTo());
     if(a!=null) {
-    System.out.println(a);
-    String password = a.getPassword();
-       
+    
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(emailRequest.getTo());
             message.setSubject("RealEstate Management System ");
-            message.setText("Password of your REMS account is : "+password);
-           
+            message.setText("Thank you for registering on RealEstate Management System . We are excited to have you!");
             System.out.println(message);
-           
             javaMailSender.send(message);
            
             return "Email sent successfully!";

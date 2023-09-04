@@ -73,6 +73,14 @@ const SignUp = () => {
     try {
       await axios.post("http://localhost:8585/register", newUser);
       Swal.fire("Success", "You are registered!", "success"); // SweetAlert2 for successful registration
+      await axios.post("http://localhost:8585/send-email", {
+  
+                      "to":email,
+                      "subject": "4S Events",
+                       "body": "This is a test email sent from the application."
+          
+      });
+  
       clearFormFields();
     } catch (error) {
       console.error("Registration error:", error);
