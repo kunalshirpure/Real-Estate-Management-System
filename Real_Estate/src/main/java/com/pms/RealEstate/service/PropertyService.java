@@ -35,4 +35,6 @@ public interface PropertyService {
 
 	List<Property> getPropertyDetailsByEmailId(String emailId);
 
+	void deletepropertybyIdi(String email_id);
+
 }

@@ -8,6 +8,8 @@ const UpdateProperty = () => {
   const navigate = useNavigate();
   console.log(propertyId);
 
+  const userRole = sessionStorage.getItem("userRole");
+
   const userId = sessionStorage.getItem("userId");
   console.log(userId);
 
@@ -65,10 +67,12 @@ const UpdateProperty = () => {
         `http://localhost:8585/update`,
         propertyDetails
       );
-      if (response.status === 200) {
+      if (response.status === 200  && userRole === 'owner') {
         console.log("Property updated successfully:", response.data);
-
         navigate("/owner");
+      }
+      else{
+        navigate("/admin");
       }
     } catch (error) {
       console.error("Error updating property:", error);
@@ -235,7 +239,7 @@ const UpdateProperty = () => {
         >
           <option value="">Select Operation</option>
           <option value="buy">Sell</option>
-          <option value="rental">Rent</option>
+          <option value="rent">Rent</option>
         </select>
 
         {propertyDetails.operation === "buy" && (
@@ -252,7 +256,7 @@ const UpdateProperty = () => {
           </>
         )}
 
-        {propertyDetails.operation === "rental" && (
+        {propertyDetails.operation === "rent" && (
           <>
             <label>Expected Rent:</label>
             <input

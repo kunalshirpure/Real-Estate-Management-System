@@ -5,9 +5,9 @@ import "./OwnerDashboard.css"; // Import your CSS file
 
 const OwnerDashboard = () => {
   const navigate = useNavigate();
-  const [loggedIn, setLoggedIn] = useState(
-    sessionStorage.getItem("loggedIn") === "true"
-  );
+  // const [loggedIn, setLoggedIn] = useState(
+  //   sessionStorage.getItem("loggedIn") === "true"
+  // );
   const [userId, setUserId] = useState(sessionStorage.getItem("userId") || "");
   const [ownedProperties, setOwnedProperties] = useState([]);
 
@@ -27,19 +27,6 @@ const OwnerDashboard = () => {
     navigate(`/property/${propertyId}`);
   };
 
-  // const handleDeleteProperty = (propertyId) => {
-  //   // Implement property deletion logic
-  //   try {
-  //     axios.delete(`http://localhost:8585/deleteproperty/${propertyId}`); // Replace with your DELETE API endpoint
-  //     ownedProperties(); // Fetch updated properties after deletion
-  //   } catch (error) {
-  //     console.error("Error deleting property:", error);
-  //   }
-  //   const updatedProperties = ownedProperties.filter(
-  //     (property) => property.id !== propertyId
-  //   );
-  //   setOwnedProperties(updatedProperties);
-  // }; 
 
   const handleDeleteProperty = async (propertyId) => {
     try {

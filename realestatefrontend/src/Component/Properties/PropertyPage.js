@@ -58,7 +58,7 @@ const PropertyPage = () => {
             <h3 className="property-title">
 
            <h1>
-            {  property.rental&&1?(<><button className="btn-success">{"For Rent"}</button><br></br></>):(<> {"For Sell"}<br></br></>)}
+            {  property.rental&&1?(<>{"For Rent"}<br></br></>):(<> {"For Sell"}<br></br></>)}
             </h1>
 
               {property.bhk_type} Flat In {property.location}{" "}
@@ -75,19 +75,17 @@ const PropertyPage = () => {
              
 
           {  property.rental&&1?(
-            <>Expected Rate: {property.rental.expected_deposit}<br></br> Expected Deposit: {property.rental.expected_deposit}<br></br> 
+            <>Expected Rent: {property.rental.expected_rent}<br></br> Expected Deposit: {property.rental.expected_deposit}<br></br> 
             Preferred Tenants: {property.rental.preferred_tenants}
             
             </> 
           
             
-          ):( <>Expected B Rate: {property.buying.expected_rate} <br></br><br></br><br></br>
+          ):( <>Expected Rate: {property.buying.expected_rate} <br></br><br></br><br></br>
                 </>
           
           )
           }
-
-
 
             </p>
 

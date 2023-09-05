@@ -1,31 +1,43 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import './PropertyServicePage.css'; // Add your CSS styles here
+import React, { useState, useEffect, useCallback } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import "./PropertyServicePage.css"; // Add your CSS styles here
 
 const PropertyServicePage = () => {
-    const { propertyId } = useParams();
+  const { propertyId } = useParams();
   const [propertyDetails, setPropertyDetails] = useState({});
   const [ownerDetails, setOwnerDetails] = useState({});
+  // const [rent,setRent] = useState({});
+  // const [buy,setBuy] = useState({});
 
-  console.log(propertyId)
-
-  
+  console.log(propertyId);
 
   const fetchPropertyDetails = useCallback(async () => {
     try {
       // Fetch property details using propertyId
-      const propertyResponse = await axios.get(`http://localhost:8585/property/${propertyId}`);
+      const propertyResponse = await axios.get(
+        `http://localhost:8585/property/${propertyId}`
+      );
       setPropertyDetails(propertyResponse.data);
-     
-     
+
       // Fetch owner details using ownerId from property details
-      const ownerResponse = await axios.get(`http://localhost:8585/property-details/${propertyResponse.data.email_id}`);
+      const ownerResponse = await axios.get(
+        `http://localhost:8585/property-details/${propertyResponse.data.email_id}`
+      );
       setOwnerDetails(ownerResponse.data);
+
+      // const rental = await axios.get(`http://localhost:8585/rented-properties`);
+      // setRent(rental.data);
+      // console.log(rent);
+
+      // const buying = await axios.get(`http://localhost:8585/buying-properties`)
+      // setBuy(buying.data);
+      // console.log(buy)
+
     } catch (error) {
-      console.error('Error fetching property details:', error);
+      console.error("Error fetching property details:", error);
     }
-  },[propertyId])
+  }, [propertyId]);
 
   useEffect(() => {
     fetchPropertyDetails();
@@ -46,12 +58,14 @@ const PropertyServicePage = () => {
         <p>State: {propertyDetails.state}</p>
         <p>Pincode : {propertyDetails.pincode}</p>
         <p>Description: {propertyDetails.description}</p>
-      
+        {/* {propertyDetails.propertyId===buy.propertyId && (<p>{buy.expected_price}</p>)} */}
         {/* Add more property details */}
       </div>
       <div className="owner-details">
         <h3>Owner Info</h3>
-        <p>Name: {ownerDetails.first_name} {"  "} {ownerDetails.last_name}</p> 
+        <p>
+          Name: {ownerDetails.first_name} {"  "} {ownerDetails.last_name}
+        </p>
         <p>Email: {ownerDetails.email_id}</p>
         <p>Address: {ownerDetails.address}</p>
         <p>Contact: {ownerDetails.contact}</p>

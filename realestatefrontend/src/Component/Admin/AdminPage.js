@@ -7,6 +7,8 @@ const AdminPage = () => {
   const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
   const [users, setUsers] = useState([]);
+  const userRole = sessionStorage.getItem("userRole");
+  console.log(userRole)
 
   useEffect(() => {
     // Simulated API call to fetch property and user data
@@ -33,7 +35,8 @@ const AdminPage = () => {
   }, []);
 
   const handleDeleteProperty = async (propertyId) => {
-    try {
+   
+      try {
       await axios.delete(`http://localhost:8585/deleteproperty/${propertyId}`);
       setProperties((prevProperties) =>
         prevProperties.filter((property) => property.property_id !== propertyId)
@@ -41,9 +44,12 @@ const AdminPage = () => {
     } catch (error) {
       console.error("Error deleting property:", error);
     }
+ 
+    
   };
 
   const handleDeleteUser = async (userId) => {
+    // if(userRole !== 'admin'){
     try {
       await axios.delete(`http://localhost:8585/delete/${userId}`);
       setUsers((prevUsers) =>
@@ -52,15 +58,19 @@ const AdminPage = () => {
     } catch (error) {
       console.error("Error deleting user:", error);
     }
+  // }else{
+  //   console.log("Admin user cannot be deleted.");
+  //   alert("Admin User cannot be deleted");
+  // }
   };
 
   const handleAccountUpdate = async (userId) => {
     navigate(`/update/${userId}`);
   };
 
-  const handleUpdateProperty = async (propertyId) =>{
-    navigate(`/propertyupdate/${propertyId}`)
-  }
+  const handleUpdateProperty = async (propertyId) => {
+    navigate(`/propertyupdate/${propertyId}`);
+  };
 
   return (
     <div className="admin-page">
@@ -92,7 +102,7 @@ const AdminPage = () => {
                     <button
                       onClick={() => handleUpdateProperty(property.property_id)}
                     >
-                      Delete
+                      Update
                     </button>
                   </div>
                 </div>

@@ -99,6 +99,71 @@ const UpdateAccount = () => {
       <h2>Update User Account</h2>
       {user ? (
         <form onSubmit={handleSubmit}>
+          <div className="form-group">
+        {/* <label>Role</label>
+        <select
+          name="role"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <option value="">Select Role</option>
+          <option value="owner">Owner</option>
+          <option value="user">User</option>
+        </select> */}
+         
+          <label>First Name:</label>
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Last Name:</label>
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        {/* <div className="form-group">
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div> */}
+        <div className="form-group">
+          <label>Contact:</label>
+          <input
+            type="tel"
+            value={contact}
+            onChange={(e) => setContact(e.target.value)}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Address:</label>
+          <input
+            type="text"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
+        </div>
           {/* Your input fields for user data */}
           <button type="submit">Update User</button>
         </form>

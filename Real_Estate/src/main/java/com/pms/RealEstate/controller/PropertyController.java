@@ -135,8 +135,11 @@ public class PropertyController {
 	
 	
 	
-	
-	
+	@DeleteMapping("/deletepropertye/{email_id}")
+	public ResponseEntity<String> deletePropertyDetailse(@PathVariable String email_id) {
+		propertyservice.deletepropertybyIdi(email_id);
+		return ResponseEntity.ok("deleted successfully");
+	}
 	
 	
 	

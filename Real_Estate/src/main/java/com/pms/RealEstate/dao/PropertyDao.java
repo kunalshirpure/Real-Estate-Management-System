@@ -32,6 +32,9 @@ public interface PropertyDao extends JpaRepository<Property, Integer> {
 
 	@Query(value="select * from property where email_id=?",nativeQuery=true)
 	List<Property> findByEmailId(String emailId);
+
+	@Query(value="delete from property where email_id=?",nativeQuery=true)
+	void deletebyemailid(String email_id);
 	
 	
 }

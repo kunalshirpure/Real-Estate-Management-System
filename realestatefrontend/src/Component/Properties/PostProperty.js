@@ -263,7 +263,7 @@ const PostProperty = () => {
         >
           <option value="">Select Operation</option>
           <option value="buy">Sell</option>
-          <option value="rental">Rent</option>
+          <option value="rent">Rent</option>
         </select>
 
         {propertyDetails.operation === "buy" && (
@@ -280,7 +280,7 @@ const PostProperty = () => {
           </>
         )}
 
-        {propertyDetails.operation === "rental" && (
+        {propertyDetails.operation === "rent" && (
           <>
             <label>Expected Rent:</label>
             <input
